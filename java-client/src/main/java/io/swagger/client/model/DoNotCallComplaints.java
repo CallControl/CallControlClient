@@ -1,26 +1,27 @@
 package io.swagger.client.model;
 
-import io.swagger.client.StringUtil;
-import java.util.*;
-import java.util.Map;
-import java.util.Date;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.*;
+import java.util.Date;
+import java.util.Map;
+
 
 
 /**
- * Free service (with registration) which serves Government Do Not Call data via API \n            Search via phone number returns available data, reported name, total complaints
+ * Free service (with registration) which serves Government Do Not Call data via API \r\n            Search via phone number returns available data, reported name, total complaints
  **/
-@ApiModel(description = "Free service (with registration) which serves Government Do Not Call data via API \n            Search via phone number returns available data, reported name, total complaints")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-14T23:02:22.377Z")
+
+@ApiModel(description = "Free service (with registration) which serves Government Do Not Call data via API \r\n            Search via phone number returns available data, reported name, total complaints")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-01-20T17:12:46.004Z")
 public class DoNotCallComplaints   {
   
   private String reportedCallerName = null;
   private Integer totalNumberOfComplaints = null;
-  private Map<String, Integer> complaintsByGovEntity = new HashMap<String, Integer>();
+  private Map<String, Integer> complaintsByEntity = new HashMap<String, Integer>();
   private Date lastCompaintDate = null;
   private List<String> tags = new ArrayList<String>();
 
@@ -28,6 +29,7 @@ public class DoNotCallComplaints   {
   /**
    * Reported Caller Name
    **/
+  
   @ApiModelProperty(value = "Reported Caller Name")
   @JsonProperty("ReportedCallerName")
   public String getReportedCallerName() {
@@ -40,6 +42,7 @@ public class DoNotCallComplaints   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("TotalNumberOfComplaints")
   public Integer getTotalNumberOfComplaints() {
@@ -52,18 +55,20 @@ public class DoNotCallComplaints   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
-  @JsonProperty("ComplaintsByGovEntity")
-  public Map<String, Integer> getComplaintsByGovEntity() {
-    return complaintsByGovEntity;
+  @JsonProperty("ComplaintsByEntity")
+  public Map<String, Integer> getComplaintsByEntity() {
+    return complaintsByEntity;
   }
-  public void setComplaintsByGovEntity(Map<String, Integer> complaintsByGovEntity) {
-    this.complaintsByGovEntity = complaintsByGovEntity;
+  public void setComplaintsByEntity(Map<String, Integer> complaintsByEntity) {
+    this.complaintsByEntity = complaintsByEntity;
   }
 
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("LastCompaintDate")
   public Date getLastCompaintDate() {
@@ -76,6 +81,7 @@ public class DoNotCallComplaints   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("Tags")
   public List<String> getTags() {
@@ -88,16 +94,51 @@ public class DoNotCallComplaints   {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    DoNotCallComplaints doNotCallComplaints = (DoNotCallComplaints) o;
+
+    return true && Objects.equals(reportedCallerName, doNotCallComplaints.reportedCallerName) &&
+        Objects.equals(totalNumberOfComplaints, doNotCallComplaints.totalNumberOfComplaints) &&
+        Objects.equals(complaintsByEntity, doNotCallComplaints.complaintsByEntity) &&
+        Objects.equals(lastCompaintDate, doNotCallComplaints.lastCompaintDate) &&
+        Objects.equals(tags, doNotCallComplaints.tags)
+    ;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(reportedCallerName, totalNumberOfComplaints, complaintsByEntity, lastCompaintDate, tags);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class DoNotCallComplaints {\n");
     
-    sb.append("    reportedCallerName: ").append(StringUtil.toIndentedString(reportedCallerName)).append("\n");
-    sb.append("    totalNumberOfComplaints: ").append(StringUtil.toIndentedString(totalNumberOfComplaints)).append("\n");
-    sb.append("    complaintsByGovEntity: ").append(StringUtil.toIndentedString(complaintsByGovEntity)).append("\n");
-    sb.append("    lastCompaintDate: ").append(StringUtil.toIndentedString(lastCompaintDate)).append("\n");
-    sb.append("    tags: ").append(StringUtil.toIndentedString(tags)).append("\n");
+    sb.append("    reportedCallerName: ").append(toIndentedString(reportedCallerName)).append("\n");
+    sb.append("    totalNumberOfComplaints: ").append(toIndentedString(totalNumberOfComplaints)).append("\n");
+    sb.append("    complaintsByEntity: ").append(toIndentedString(complaintsByEntity)).append("\n");
+    sb.append("    lastCompaintDate: ").append(toIndentedString(lastCompaintDate)).append("\n");
+    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

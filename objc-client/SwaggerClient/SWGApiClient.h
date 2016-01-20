@@ -15,6 +15,7 @@
 #import "SWGDoNotCallComplaints.h"
 #import "SWGReputation.h"
 #import "SWGCallReport.h"
+#import "SWGReporterLoation.h"
 
 
 @class SWGConfiguration;

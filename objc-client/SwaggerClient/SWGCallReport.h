@@ -7,6 +7,7 @@
  * Do not edit the class manually.
  */
 
+#import "SWGReporterLoation.h"
 
 
 @protocol SWGCallReport
@@ -28,5 +29,9 @@
 @property(nonatomic) NSNumber* unwantedCall;
 
 @property(nonatomic) NSDate* callTime;
+
+@property(nonatomic) NSString* reporter;
+
+@property(nonatomic) SWGReporterLoation* reporterLoation;
 
 @end

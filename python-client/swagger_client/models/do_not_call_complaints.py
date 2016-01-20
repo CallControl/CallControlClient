@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-Copyright 2015 SmartBear Software
+Copyright 2016 SmartBear Software
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ class DoNotCallComplaints(object):
         self.swagger_types = {
             'reported_caller_name': 'str',
             'total_number_of_complaints': 'int',
-            'complaints_by_gov_entity': 'dict(str, int)',
+            'complaints_by_entity': 'dict(str, int)',
             'last_compaint_date': 'datetime',
             'tags': 'list[str]'
         }
@@ -47,14 +47,14 @@ class DoNotCallComplaints(object):
         self.attribute_map = {
             'reported_caller_name': 'ReportedCallerName',
             'total_number_of_complaints': 'TotalNumberOfComplaints',
-            'complaints_by_gov_entity': 'ComplaintsByGovEntity',
+            'complaints_by_entity': 'ComplaintsByEntity',
             'last_compaint_date': 'LastCompaintDate',
             'tags': 'Tags'
         }
 
         self._reported_caller_name = None
         self._total_number_of_complaints = None
-        self._complaints_by_gov_entity = None
+        self._complaints_by_entity = None
         self._last_compaint_date = None
         self._tags = None
 
@@ -103,26 +103,26 @@ class DoNotCallComplaints(object):
         self._total_number_of_complaints = total_number_of_complaints
 
     @property
-    def complaints_by_gov_entity(self):
+    def complaints_by_entity(self):
         """
-        Gets the complaints_by_gov_entity of this DoNotCallComplaints.
+        Gets the complaints_by_entity of this DoNotCallComplaints.
 
 
-        :return: The complaints_by_gov_entity of this DoNotCallComplaints.
+        :return: The complaints_by_entity of this DoNotCallComplaints.
         :rtype: dict(str, int)
         """
-        return self._complaints_by_gov_entity
+        return self._complaints_by_entity
 
-    @complaints_by_gov_entity.setter
-    def complaints_by_gov_entity(self, complaints_by_gov_entity):
+    @complaints_by_entity.setter
+    def complaints_by_entity(self, complaints_by_entity):
         """
-        Sets the complaints_by_gov_entity of this DoNotCallComplaints.
+        Sets the complaints_by_entity of this DoNotCallComplaints.
 
 
-        :param complaints_by_gov_entity: The complaints_by_gov_entity of this DoNotCallComplaints.
+        :param complaints_by_entity: The complaints_by_entity of this DoNotCallComplaints.
         :type: dict(str, int)
         """
-        self._complaints_by_gov_entity = complaints_by_gov_entity
+        self._complaints_by_entity = complaints_by_entity
 
     @property
     def last_compaint_date(self):
@@ -199,3 +199,16 @@ class DoNotCallComplaints(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

@@ -8,7 +8,7 @@ case class DoNotCallComplaints (
   /* Reported Caller Name */
   ReportedCallerName: String,
   TotalNumberOfComplaints: Integer,
-  ComplaintsByGovEntity: Map[String, Integer],
+  ComplaintsByEntity: Map[String, Integer],
   LastCompaintDate: DateTime,
   Tags: List[String])
   

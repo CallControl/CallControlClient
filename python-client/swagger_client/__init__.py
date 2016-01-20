@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from .models.do_not_call_complaints import DoNotCallComplaints
 from .models.reputation import Reputation
 from .models.call_report import CallReport
+from .models.reporter_loation import ReporterLoation
 
 # import apis into sdk package
 from .apis.reputation_api import ReputationApi

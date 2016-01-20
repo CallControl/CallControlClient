@@ -1,25 +1,25 @@
 package io.swagger.client.model;
 
 import java.util.*;
-import java.util.Map;
 import java.util.Date;
+import java.util.Map;
 
 import io.swagger.annotations.*;
 import com.google.gson.annotations.SerializedName;
 
 
 /**
- * Free service (with registration) which serves Government Do Not Call data via API \n            Search via phone number returns available data, reported name, total complaints
+ * Free service (with registration) which serves Government Do Not Call data via API \r\n            Search via phone number returns available data, reported name, total complaints
  **/
-@ApiModel(description = "Free service (with registration) which serves Government Do Not Call data via API \n            Search via phone number returns available data, reported name, total complaints")
+@ApiModel(description = "Free service (with registration) which serves Government Do Not Call data via API \r\n            Search via phone number returns available data, reported name, total complaints")
 public class DoNotCallComplaints  {
   
   @SerializedName("ReportedCallerName")
   private String reportedCallerName = null;
   @SerializedName("TotalNumberOfComplaints")
   private Integer totalNumberOfComplaints = null;
-  @SerializedName("ComplaintsByGovEntity")
-  private Map<String, Integer> complaintsByGovEntity = null;
+  @SerializedName("ComplaintsByEntity")
+  private Map<String, Integer> complaintsByEntity = null;
   @SerializedName("LastCompaintDate")
   private Date lastCompaintDate = null;
   @SerializedName("Tags")
@@ -52,11 +52,11 @@ public class DoNotCallComplaints  {
   /**
    **/
   @ApiModelProperty(value = "")
-  public Map<String, Integer> getComplaintsByGovEntity() {
-    return complaintsByGovEntity;
+  public Map<String, Integer> getComplaintsByEntity() {
+    return complaintsByEntity;
   }
-  public void setComplaintsByGovEntity(Map<String, Integer> complaintsByGovEntity) {
-    this.complaintsByGovEntity = complaintsByGovEntity;
+  public void setComplaintsByEntity(Map<String, Integer> complaintsByEntity) {
+    this.complaintsByEntity = complaintsByEntity;
   }
 
   
@@ -90,7 +90,7 @@ public class DoNotCallComplaints  {
     
     sb.append("  reportedCallerName: ").append(reportedCallerName).append("\n");
     sb.append("  totalNumberOfComplaints: ").append(totalNumberOfComplaints).append("\n");
-    sb.append("  complaintsByGovEntity: ").append(complaintsByGovEntity).append("\n");
+    sb.append("  complaintsByEntity: ").append(complaintsByEntity).append("\n");
     sb.append("  lastCompaintDate: ").append(lastCompaintDate).append("\n");
     sb.append("  tags: ").append(tags).append("\n");
     sb.append("}\n");

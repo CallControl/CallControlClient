@@ -1,5 +1,5 @@
 #
-# Copyright 2015 SmartBear Software
+# Copyright 2016 SmartBear Software
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,11 +30,14 @@ use Log::Any qw($log);
 use WWW::SwaggerClient::ApiClient;
 use WWW::SwaggerClient::Configuration;
 
+use base "Class::Data::Inheritable";
+
+__PACKAGE__->mk_classdata('method_documentation' => {});
+
 sub new {
     my $class   = shift;
-    my $default_api_client = $WWW::SwaggerClient::Configuration::api_client ? $WWW::SwaggerClient::Configuration::api_client  : WWW::SwaggerClient::ApiClient->new;
     my (%self) = (
-        'api_client' => $default_api_client,
+        'api_client' => WWW::SwaggerClient::ApiClient->instance,
         @_
     );
 
@@ -47,12 +50,27 @@ sub new {
 
 }
 
+
 #
 # do_not_call_complaints_do_not_call_complaints
 #
-# <br />\n<b>DoNotCallComplaints</b>\n<br />Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
+# <br />\r\n<b>DoNotCallComplaints</b>\r\n<br />Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
 # 
 # @param string $phone_number phone number to search (required)
+{
+    my $params = {
+    'phone_number' => {
+        data_type => 'string',
+        description => 'phone number to search',
+        required => '1',
+    },
+    };
+    __PACKAGE__->method_documentation->{ do_not_call_complaints_do_not_call_complaints } = { 
+    	summary => '&lt;br /&gt;\r\n&lt;b&gt;DoNotCallComplaints&lt;/b&gt;\r\n&lt;br /&gt;Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.',
+        params => $params,
+        returns => 'DoNotCallComplaints',
+        };
+}
 # @return DoNotCallComplaints
 #
 sub do_not_call_complaints_do_not_call_complaints {
@@ -94,7 +112,7 @@ sub do_not_call_complaints_do_not_call_complaints {
     
 
     # authentication setting, if any
-    my $auth_settings = [];
+    my $auth_settings = [qw()];
 
     # make the API Call
     my $response = $self->{api_client}->call_api($_resource_path, $_method,

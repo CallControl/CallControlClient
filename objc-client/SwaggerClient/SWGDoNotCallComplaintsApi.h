@@ -21,8 +21,8 @@
 +(SWGDoNotCallComplaintsApi*) sharedAPI;
 ///
 ///
-/// <br />\n<b>DoNotCallComplaints</b>\n<br />Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
-/// This is the main funciton to get data out of the call control reporting system<br />\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
+/// <br />\r\n<b>DoNotCallComplaints</b>\r\n<br />Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
+/// This is the main funciton to get data out of the call control reporting system<br />\r\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
 ///
 /// @param phoneNumber phone number to search
 /// 

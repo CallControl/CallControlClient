@@ -4,3 +4,4 @@ from __future__ import absolute_import
 from .do_not_call_complaints import DoNotCallComplaints
 from .reputation import Reputation
 from .call_report import CallReport
+from .reporter_loation import ReporterLoation

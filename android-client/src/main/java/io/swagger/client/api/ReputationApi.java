@@ -40,9 +40,9 @@ public class ReputationApi {
 
   
   /**
-   * Report:&lt;/b&gt; report spam calls received to better tune our algorithms based upon spam calls you receive
-   * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
-   * @param callReport [FromBody] Call Report\n            PhoneNumber, \n            Caller name(optional), \n            Call category(optional), \n            Comment or tags(free text) (optional), \n            Unwanted call  - yes/no(optional),
+   * &lt;br /&gt;\r\n&lt;b&gt;Report:&lt;/b&gt; report spam calls received to better tune our algorithms based upon spam calls you receive
+   * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
+   * @param callReport [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
    * @return void
    */
   public void  reputationReport (CallReport callReport) throws ApiException {
@@ -99,8 +99,8 @@ public class ReputationApi {
   }
   
   /**
-   * &lt;br /&gt;\n&lt;b&gt;Reputation&lt;/b&gt;\n&lt;br /&gt;\n            Premium service which returns a reputation informaiton of a phone number via API.
-   * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
+   * &lt;br /&gt;\r\n&lt;b&gt;Reputation&lt;/b&gt;\r\n&lt;br /&gt;\r\n            Premium service which returns a reputation informaiton of a phone number via API.
+   * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
    * @param phoneNumber phone number to search
    * @return Reputation
    */

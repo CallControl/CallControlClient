@@ -9,7 +9,7 @@ import http = require('http');
 /* tslint:disable:no-unused-variable */
 
 /**
-* Free service (with registration) which serves Government Do Not Call data via API \n            Search via phone number returns available data, reported name, total complaints
+* Free service (with registration) which serves Government Do Not Call data via API \r\n            Search via phone number returns available data, reported name, total complaints
 */
 export class DoNotCallComplaints {
     /**
@@ -17,7 +17,7 @@ export class DoNotCallComplaints {
     */
     reportedCallerName: string;
     totalNumberOfComplaints: number;
-    complaintsByGovEntity: { [key: string]: number; };
+    complaintsByEntity: { [key: string]: number; };
     lastCompaintDate: Date;
     tags: Array<string>;
 }
@@ -32,7 +32,7 @@ export class Reputation {
 }
 
 /**
-* Call Report\n            PhoneNumber, \n            Caller name(optional), \n            Call category(optional), \n            Comment or tags(free text) (optional), \n            Unwanted call  - yes/no(optional),
+* Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
 */
 export class CallReport {
     phoneNumber: string;
@@ -42,6 +42,8 @@ export class CallReport {
     comment: string;
     unwantedCall: boolean;
     callTime: Date;
+    reporter: string;
+    reporterLoation: ReporterLoation;
 }
 
 export namespace CallReport {
@@ -66,6 +68,12 @@ export namespace CallReport {
         Callback = <any> 'Callback',
     }
 }
+export class ReporterLoation {
+    ipAddress: string;
+    latitude: number;
+    longitude: number;
+}
+
 
 interface Authentication {
     /**
@@ -100,8 +108,10 @@ class ApiKeyAuth implements Authentication {
 }
 
 class OAuth implements Authentication {
+    public accessToken: string;
+
     applyToRequest(requestOptions: request.Options): void {
-        // TODO: support oauth
+        requestOptions.headers["Authorization"] = "Bearer " + this.accessToken;
     }
 }
 
@@ -124,8 +134,8 @@ export class ReputationApi {
         'apiKey': new ApiKeyAuth('header', 'apiKey'),
     }
 
-    constructor(url: string, basePath?: string);
-    constructor(private url: string, basePathOrUsername: string, password?: string, basePath?: string) {
+    constructor(basePath?: string);
+    constructor(basePathOrUsername: string, password?: string, basePath?: string) {
         if (password) {
             if (basePath) {
                 this.basePath = basePath;
@@ -148,9 +158,13 @@ export class ReputationApi {
         }
         return <T1&T2>objA;
     }
-
+    /**
+     * &lt;br /&gt;\r\n&lt;b&gt;Report:&lt;/b&gt; report spam calls received to better tune our algorithms based upon spam calls you receive
+     * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
+     * @param callReport [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
+     */
     public reputationReport (callReport: CallReport) : Promise<{ response: http.ClientResponse; body?: any;  }> {
-        const path = this.url + this.basePath + '/api/2015-11-01/Report';
+        const path = this.basePath + '/api/2015-11-01/Report';
         let queryParameters: any = {};
         let headerParams: any = this.extendObj({}, this.defaultHeaders);
         let formParams: any = {};
@@ -198,9 +212,13 @@ export class ReputationApi {
 
         return deferred.promise;
     }
-
+    /**
+     * &lt;br /&gt;\r\n&lt;b&gt;Reputation&lt;/b&gt;\r\n&lt;br /&gt;\r\n            Premium service which returns a reputation informaiton of a phone number via API.
+     * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
+     * @param phoneNumber phone number to search
+     */
     public reputationReputation (phoneNumber: string) : Promise<{ response: http.ClientResponse; body: Reputation;  }> {
-        const path = this.url + this.basePath + '/api/2015-11-01/Reputation/{phoneNumber}'
+        const path = this.basePath + '/api/2015-11-01/Reputation/{phoneNumber}'
             .replace('{' + 'phoneNumber' + '}', String(phoneNumber));
         let queryParameters: any = {};
         let headerParams: any = this.extendObj({}, this.defaultHeaders);
@@ -260,8 +278,8 @@ export class DoNotCallComplaintsApi {
         'apiKey': new ApiKeyAuth('header', 'apiKey'),
     }
 
-    constructor(url: string, basePath?: string);
-    constructor(private url: string, basePathOrUsername: string, password?: string, basePath?: string) {
+    constructor(basePath?: string);
+    constructor(basePathOrUsername: string, password?: string, basePath?: string) {
         if (password) {
             if (basePath) {
                 this.basePath = basePath;
@@ -284,9 +302,13 @@ export class DoNotCallComplaintsApi {
         }
         return <T1&T2>objA;
     }
-
+    /**
+     * &lt;br /&gt;\r\n&lt;b&gt;DoNotCallComplaints&lt;/b&gt;\r\n&lt;br /&gt;Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
+     * This is the main funciton to get data out of the call control reporting system&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
+     * @param phoneNumber phone number to search
+     */
     public doNotCallComplaintsDoNotCallComplaints (phoneNumber: string) : Promise<{ response: http.ClientResponse; body: DoNotCallComplaints;  }> {
-        const path = this.url + this.basePath + '/api/2015-11-01/DoNotCallComplaints/{phoneNumber}'
+        const path = this.basePath + '/api/2015-11-01/DoNotCallComplaints/{phoneNumber}'
             .replace('{' + 'phoneNumber' + '}', String(phoneNumber));
         let queryParameters: any = {};
         let headerParams: any = this.extendObj({}, this.defaultHeaders);

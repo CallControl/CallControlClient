@@ -2,13 +2,24 @@
 
 @implementation SWGDoNotCallComplaints
 
+- (instancetype)init {
+  self = [super init];
+
+  if (self) {
+    // initalise property's default value, if any
+    
+  }
+
+  return self;
+}
+
 /**
  * Maps json key to property name.
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper
 {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"ReportedCallerName": @"reportedCallerName", @"TotalNumberOfComplaints": @"totalNumberOfComplaints", @"ComplaintsByGovEntity": @"complaintsByGovEntity", @"LastCompaintDate": @"lastCompaintDate", @"Tags": @"tags" }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"ReportedCallerName": @"reportedCallerName", @"TotalNumberOfComplaints": @"totalNumberOfComplaints", @"ComplaintsByEntity": @"complaintsByEntity", @"LastCompaintDate": @"lastCompaintDate", @"Tags": @"tags" }];
 }
 
 /**
@@ -18,7 +29,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName
 {
-  NSArray *optionalProperties = @[@"reportedCallerName", @"totalNumberOfComplaints", @"complaintsByGovEntity", @"lastCompaintDate", @"tags"];
+  NSArray *optionalProperties = @[@"reportedCallerName", @"totalNumberOfComplaints", @"complaintsByEntity", @"lastCompaintDate", @"tags"];
 
   if ([optionalProperties containsObject:propertyName]) {
     return YES;

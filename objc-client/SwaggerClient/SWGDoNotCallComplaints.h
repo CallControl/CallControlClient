@@ -20,7 +20,7 @@
 
 @property(nonatomic) NSNumber* totalNumberOfComplaints;
 
-@property(nonatomic) NSDictionary* /* NSString, NSNumber */ complaintsByGovEntity;
+@property(nonatomic) NSDictionary* /* NSString, NSNumber */ complaintsByEntity;
 
 @property(nonatomic) NSDate* lastCompaintDate;
 

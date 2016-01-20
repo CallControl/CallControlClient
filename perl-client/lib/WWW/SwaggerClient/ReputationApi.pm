@@ -1,5 +1,5 @@
 #
-# Copyright 2015 SmartBear Software
+# Copyright 2016 SmartBear Software
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,11 +30,14 @@ use Log::Any qw($log);
 use WWW::SwaggerClient::ApiClient;
 use WWW::SwaggerClient::Configuration;
 
+use base "Class::Data::Inheritable";
+
+__PACKAGE__->mk_classdata('method_documentation' => {});
+
 sub new {
     my $class   = shift;
-    my $default_api_client = $WWW::SwaggerClient::Configuration::api_client ? $WWW::SwaggerClient::Configuration::api_client  : WWW::SwaggerClient::ApiClient->new;
     my (%self) = (
-        'api_client' => $default_api_client,
+        'api_client' => WWW::SwaggerClient::ApiClient->instance,
         @_
     );
 
@@ -47,12 +50,27 @@ sub new {
 
 }
 
+
 #
 # reputation_report
 #
-# Report:</b> report spam calls received to better tune our algorithms based upon spam calls you receive
+# <br />\r\n<b>Report:</b> report spam calls received to better tune our algorithms based upon spam calls you receive
 # 
-# @param CallReport $call_report [FromBody] Call Report\n            PhoneNumber, \n            Caller name(optional), \n            Call category(optional), \n            Comment or tags(free text) (optional), \n            Unwanted call  - yes/no(optional), (required)
+# @param CallReport $call_report [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional), (required)
+{
+    my $params = {
+    'call_report' => {
+        data_type => 'CallReport',
+        description => '[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),',
+        required => '1',
+    },
+    };
+    __PACKAGE__->method_documentation->{ reputation_report } = { 
+    	summary => '&lt;br /&gt;\r\n&lt;b&gt;Report:&lt;/b&gt; report spam calls received to better tune our algorithms based upon spam calls you receive',
+        params => $params,
+        returns => undef,
+        };
+}
 # @return void
 #
 sub reputation_report {
@@ -92,7 +110,7 @@ sub reputation_report {
     }
 
     # authentication setting, if any
-    my $auth_settings = [];
+    my $auth_settings = [qw()];
 
     # make the API Call
     
@@ -102,12 +120,27 @@ sub reputation_report {
     return;
     
 }
+
 #
 # reputation_reputation
 #
-# <br />\n<b>Reputation</b>\n<br />\n            Premium service which returns a reputation informaiton of a phone number via API.
+# <br />\r\n<b>Reputation</b>\r\n<br />\r\n            Premium service which returns a reputation informaiton of a phone number via API.
 # 
 # @param string $phone_number phone number to search (required)
+{
+    my $params = {
+    'phone_number' => {
+        data_type => 'string',
+        description => 'phone number to search',
+        required => '1',
+    },
+    };
+    __PACKAGE__->method_documentation->{ reputation_reputation } = { 
+    	summary => '&lt;br /&gt;\r\n&lt;b&gt;Reputation&lt;/b&gt;\r\n&lt;br /&gt;\r\n            Premium service which returns a reputation informaiton of a phone number via API.',
+        params => $params,
+        returns => 'Reputation',
+        };
+}
 # @return Reputation
 #
 sub reputation_reputation {
@@ -149,7 +182,7 @@ sub reputation_reputation {
     
 
     # authentication setting, if any
-    my $auth_settings = [];
+    my $auth_settings = [qw()];
 
     # make the API Call
     my $response = $self->{api_client}->call_api($_resource_path, $_method,

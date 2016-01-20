@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-Copyright 2015 SmartBear Software
+Copyright 2016 SmartBear Software
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -43,7 +43,9 @@ class CallReport(object):
             'caller_type': 'str',
             'comment': 'str',
             'unwanted_call': 'bool',
-            'call_time': 'datetime'
+            'call_time': 'datetime',
+            'reporter': 'str',
+            'reporter_loation': 'ReporterLoation'
         }
 
         self.attribute_map = {
@@ -53,7 +55,9 @@ class CallReport(object):
             'caller_type': 'CallerType',
             'comment': 'Comment',
             'unwanted_call': 'UnwantedCall',
-            'call_time': 'CallTime'
+            'call_time': 'CallTime',
+            'reporter': 'Reporter',
+            'reporter_loation': 'ReporterLoation'
         }
 
         self._phone_number = None
@@ -63,6 +67,8 @@ class CallReport(object):
         self._comment = None
         self._unwanted_call = None
         self._call_time = None
+        self._reporter = None
+        self._reporter_loation = None
 
     @property
     def phone_number(self):
@@ -224,6 +230,50 @@ class CallReport(object):
         """
         self._call_time = call_time
 
+    @property
+    def reporter(self):
+        """
+        Gets the reporter of this CallReport.
+
+
+        :return: The reporter of this CallReport.
+        :rtype: str
+        """
+        return self._reporter
+
+    @reporter.setter
+    def reporter(self, reporter):
+        """
+        Sets the reporter of this CallReport.
+
+
+        :param reporter: The reporter of this CallReport.
+        :type: str
+        """
+        self._reporter = reporter
+
+    @property
+    def reporter_loation(self):
+        """
+        Gets the reporter_loation of this CallReport.
+
+
+        :return: The reporter_loation of this CallReport.
+        :rtype: ReporterLoation
+        """
+        return self._reporter_loation
+
+    @reporter_loation.setter
+    def reporter_loation(self, reporter_loation):
+        """
+        Sets the reporter_loation of this CallReport.
+
+
+        :param reporter_loation: The reporter_loation of this CallReport.
+        :type: ReporterLoation
+        """
+        self._reporter_loation = reporter_loation
+
     def to_dict(self):
         """
         Returns the model properties as a dict
@@ -255,3 +305,16 @@ class CallReport(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

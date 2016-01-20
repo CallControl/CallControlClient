@@ -2,7 +2,7 @@
 
 """
 ReputationApi.py
-Copyright 2015 SmartBear Software
+Copyright 2016 SmartBear Software
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -47,8 +47,8 @@ class ReputationApi(object):
 
     def reputation_report(self, call_report, **kwargs):
         """
-        Report:</b> report spam calls received to better tune our algorithms based upon spam calls you receive
-        This returns information required to perform basic call blocking behaviors<br />\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
+        <br />\r\n<b>Report:</b> report spam calls received to better tune our algorithms based upon spam calls you receive
+        This returns information required to perform basic call blocking behaviors<br />\r\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -60,7 +60,7 @@ class ReputationApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param CallReport call_report: [FromBody] Call Report\n            PhoneNumber, \n            Caller name(optional), \n            Call category(optional), \n            Comment or tags(free text) (optional), \n            Unwanted call  - yes/no(optional), (required)
+        :param CallReport call_report: [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional), (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -126,8 +126,8 @@ class ReputationApi(object):
 
     def reputation_reputation(self, phone_number, **kwargs):
         """
-        <br />\n<b>Reputation</b>\n<br />\n            Premium service which returns a reputation informaiton of a phone number via API.
-        This returns information required to perform basic call blocking behaviors<br />\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
+        <br />\r\n<b>Reputation</b>\r\n<br />\r\n            Premium service which returns a reputation informaiton of a phone number via API.
+        This returns information required to perform basic call blocking behaviors<br />\r\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function

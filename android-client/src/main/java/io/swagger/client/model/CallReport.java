@@ -1,5 +1,6 @@
 package io.swagger.client.model;
 
+import io.swagger.client.model.ReporterLoation;
 import java.util.Date;
 
 import io.swagger.annotations.*;
@@ -7,9 +8,9 @@ import com.google.gson.annotations.SerializedName;
 
 
 /**
- * Call Report\n            PhoneNumber, \n            Caller name(optional), \n            Call category(optional), \n            Comment or tags(free text) (optional), \n            Unwanted call  - yes/no(optional),
+ * Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
  **/
-@ApiModel(description = "Call Report\n            PhoneNumber, \n            Caller name(optional), \n            Call category(optional), \n            Comment or tags(free text) (optional), \n            Unwanted call  - yes/no(optional),")
+@ApiModel(description = "Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),")
 public class CallReport  {
   
   @SerializedName("PhoneNumber")
@@ -29,6 +30,10 @@ public class CallReport  {
   private Boolean unwantedCall = null;
   @SerializedName("CallTime")
   private Date callTime = null;
+  @SerializedName("Reporter")
+  private String reporter = null;
+  @SerializedName("ReporterLoation")
+  private ReporterLoation reporterLoation = null;
 
   
   /**
@@ -108,6 +113,28 @@ public class CallReport  {
   }
 
   
+  /**
+   **/
+  @ApiModelProperty(value = "")
+  public String getReporter() {
+    return reporter;
+  }
+  public void setReporter(String reporter) {
+    this.reporter = reporter;
+  }
+
+  
+  /**
+   **/
+  @ApiModelProperty(value = "")
+  public ReporterLoation getReporterLoation() {
+    return reporterLoation;
+  }
+  public void setReporterLoation(ReporterLoation reporterLoation) {
+    this.reporterLoation = reporterLoation;
+  }
+
+  
 
   @Override
   public String toString()  {
@@ -121,6 +148,8 @@ public class CallReport  {
     sb.append("  comment: ").append(comment).append("\n");
     sb.append("  unwantedCall: ").append(unwantedCall).append("\n");
     sb.append("  callTime: ").append(callTime).append("\n");
+    sb.append("  reporter: ").append(reporter).append("\n");
+    sb.append("  reporterLoation: ").append(reporterLoation).append("\n");
     sb.append("}\n");
     return sb.toString();
   }

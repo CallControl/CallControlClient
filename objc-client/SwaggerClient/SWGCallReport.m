@@ -2,13 +2,24 @@
 
 @implementation SWGCallReport
 
+- (instancetype)init {
+  self = [super init];
+
+  if (self) {
+    // initalise property's default value, if any
+    
+  }
+
+  return self;
+}
+
 /**
  * Maps json key to property name.
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper
 {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"PhoneNumber": @"phoneNumber", @"ReportedCallerName": @"reportedCallerName", @"ReportedCallerId": @"reportedCallerId", @"CallerType": @"callerType", @"Comment": @"comment", @"UnwantedCall": @"unwantedCall", @"CallTime": @"callTime" }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"PhoneNumber": @"phoneNumber", @"ReportedCallerName": @"reportedCallerName", @"ReportedCallerId": @"reportedCallerId", @"CallerType": @"callerType", @"Comment": @"comment", @"UnwantedCall": @"unwantedCall", @"CallTime": @"callTime", @"Reporter": @"reporter", @"ReporterLoation": @"reporterLoation" }];
 }
 
 /**
@@ -18,7 +29,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName
 {
-  NSArray *optionalProperties = @[@"phoneNumber", @"reportedCallerName", @"reportedCallerId", @"callerType", @"comment", @"unwantedCall", @"callTime"];
+  NSArray *optionalProperties = @[@"phoneNumber", @"reportedCallerName", @"reportedCallerId", @"callerType", @"comment", @"unwantedCall", @"callTime", @"reporter", @"reporterLoation"];
 
   if ([optionalProperties containsObject:propertyName]) {
     return YES;

@@ -11,5 +11,7 @@ case class CallReport (
   CallerType: String,
   Comment: String,
   UnwantedCall: Boolean,
-  CallTime: DateTime)
+  CallTime: DateTime,
+  Reporter: String,
+  ReporterLoation: ReporterLoation)
   

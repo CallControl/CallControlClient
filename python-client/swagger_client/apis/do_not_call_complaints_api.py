@@ -2,7 +2,7 @@
 
 """
 DoNotCallComplaintsApi.py
-Copyright 2015 SmartBear Software
+Copyright 2016 SmartBear Software
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -47,8 +47,8 @@ class DoNotCallComplaintsApi(object):
 
     def do_not_call_complaints_do_not_call_complaints(self, phone_number, **kwargs):
         """
-        <br />\n<b>DoNotCallComplaints</b>\n<br />Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
-        This is the main funciton to get data out of the call control reporting system<br />\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
+        <br />\r\n<b>DoNotCallComplaints</b>\r\n<br />Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
+        This is the main funciton to get data out of the call control reporting system<br />\r\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function

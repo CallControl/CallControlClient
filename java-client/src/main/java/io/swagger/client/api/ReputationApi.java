@@ -1,17 +1,18 @@
 package io.swagger.client.api;
 
+import com.sun.jersey.api.client.GenericType;
+
 import io.swagger.client.ApiException;
 import io.swagger.client.ApiClient;
 import io.swagger.client.Configuration;
 import io.swagger.client.Pair;
-import io.swagger.client.TypeRef;
 
 import io.swagger.client.model.CallReport;
 import io.swagger.client.model.Reputation;
 
 import java.util.*;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-14T23:02:22.377Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-01-20T17:12:46.004Z")
 public class ReputationApi {
   private ApiClient apiClient;
 
@@ -33,14 +34,13 @@ public class ReputationApi {
 
   
   /**
-   * &lt;br /&gt;\n&lt;b&gt;Report:&lt;/b&gt; report spam calls received to better tune our algorithms based upon spam calls you receive
-   * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
-   * @param callReport [FromBody] Call Report\n            PhoneNumber, \n            Caller name(optional), \n            Call category(optional), \n            Comment or tags(free text) (optional), \n            Unwanted call  - yes/no(optional),
+   * &lt;br /&gt;\r\n&lt;b&gt;Report:&lt;/b&gt; report spam calls received to better tune our algorithms based upon spam calls you receive
+   * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
+   * @param callReport [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
    * @return void
    */
-  public void reputationReport (CallReport callReport) throws ApiException {
+  public void reputationReport(CallReport callReport) throws ApiException {
     Object postBody = callReport;
-    byte[] postBinaryBody = null;
     
      // verify the required parameter 'callReport' is set
      if (callReport == null) {
@@ -74,25 +74,18 @@ public class ReputationApi {
     String[] authNames = new String[] {  };
 
     
-
+    apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, null);
     
-    
-    apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, null);
-    
-    
-
-
   }
   
   /**
-   * &lt;br /&gt;\n&lt;b&gt;Reputation&lt;/b&gt;\n&lt;br /&gt;\n            Premium service which returns a reputation informaiton of a phone number via API.
-   * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
+   * &lt;br /&gt;\r\n&lt;b&gt;Reputation&lt;/b&gt;\r\n&lt;br /&gt;\r\n            Premium service which returns a reputation informaiton of a phone number via API.
+   * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
    * @param phoneNumber phone number to search
    * @return Reputation
    */
-  public Reputation reputationReputation (String phoneNumber) throws ApiException {
+  public Reputation reputationReputation(String phoneNumber) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
      // verify the required parameter 'phoneNumber' is set
      if (phoneNumber == null) {
@@ -127,15 +120,9 @@ public class ReputationApi {
     String[] authNames = new String[] {  };
 
     
-
+    GenericType<Reputation> returnType = new GenericType<Reputation>() {};
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<Reputation>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
 }

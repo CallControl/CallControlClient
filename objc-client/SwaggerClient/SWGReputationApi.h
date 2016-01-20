@@ -22,10 +22,10 @@
 +(SWGReputationApi*) sharedAPI;
 ///
 ///
-/// Report:</b> report spam calls received to better tune our algorithms based upon spam calls you receive
-/// This returns information required to perform basic call blocking behaviors<br />\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
+/// <br />\r\n<b>Report:</b> report spam calls received to better tune our algorithms based upon spam calls you receive
+/// This returns information required to perform basic call blocking behaviors<br />\r\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
 ///
-/// @param callReport [FromBody] Call Report\n            PhoneNumber, \n            Caller name(optional), \n            Call category(optional), \n            Comment or tags(free text) (optional), \n            Unwanted call  - yes/no(optional),
+/// @param callReport [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
 /// 
 ///
 /// @return 
@@ -37,8 +37,8 @@
 
 ///
 ///
-/// <br />\n<b>Reputation</b>\n<br />\n            Premium service which returns a reputation informaiton of a phone number via API.
-/// This returns information required to perform basic call blocking behaviors<br />\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
+/// <br />\r\n<b>Reputation</b>\r\n<br />\r\n            Premium service which returns a reputation informaiton of a phone number via API.
+/// This returns information required to perform basic call blocking behaviors<br />\r\n            Try with api_key 'demo' and phone number 12674070100 (spam) 12061231234 (not spam)
 ///
 /// @param phoneNumber phone number to search
 /// 

@@ -1,17 +1,18 @@
 package io.swagger.client.model;
 
-import io.swagger.client.StringUtil;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.*;
 import java.util.Date;
 
 
 
-import io.swagger.annotations.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-14T23:02:22.377Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-01-20T17:12:46.004Z")
 public class Reputation   {
   
   private String callType = null;
@@ -24,6 +25,7 @@ public class Reputation   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("CallType")
   public String getCallType() {
@@ -36,6 +38,7 @@ public class Reputation   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("Confidence")
   public Integer getConfidence() {
@@ -48,6 +51,7 @@ public class Reputation   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("IsSpam")
   public Boolean getIsSpam() {
@@ -60,6 +64,7 @@ public class Reputation   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("LastCompaintDate")
   public Date getLastCompaintDate() {
@@ -72,6 +77,7 @@ public class Reputation   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("ReportedCallerName")
   public String getReportedCallerName() {
@@ -84,6 +90,7 @@ public class Reputation   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("Tags")
   public List<String> getTags() {
@@ -96,17 +103,53 @@ public class Reputation   {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Reputation reputation = (Reputation) o;
+
+    return true && Objects.equals(callType, reputation.callType) &&
+        Objects.equals(confidence, reputation.confidence) &&
+        Objects.equals(isSpam, reputation.isSpam) &&
+        Objects.equals(lastCompaintDate, reputation.lastCompaintDate) &&
+        Objects.equals(reportedCallerName, reputation.reportedCallerName) &&
+        Objects.equals(tags, reputation.tags)
+    ;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(callType, confidence, isSpam, lastCompaintDate, reportedCallerName, tags);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Reputation {\n");
     
-    sb.append("    callType: ").append(StringUtil.toIndentedString(callType)).append("\n");
-    sb.append("    confidence: ").append(StringUtil.toIndentedString(confidence)).append("\n");
-    sb.append("    isSpam: ").append(StringUtil.toIndentedString(isSpam)).append("\n");
-    sb.append("    lastCompaintDate: ").append(StringUtil.toIndentedString(lastCompaintDate)).append("\n");
-    sb.append("    reportedCallerName: ").append(StringUtil.toIndentedString(reportedCallerName)).append("\n");
-    sb.append("    tags: ").append(StringUtil.toIndentedString(tags)).append("\n");
+    sb.append("    callType: ").append(toIndentedString(callType)).append("\n");
+    sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
+    sb.append("    isSpam: ").append(toIndentedString(isSpam)).append("\n");
+    sb.append("    lastCompaintDate: ").append(toIndentedString(lastCompaintDate)).append("\n");
+    sb.append("    reportedCallerName: ").append(toIndentedString(reportedCallerName)).append("\n");
+    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

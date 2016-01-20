@@ -1,6 +1,6 @@
-# Call Control Platform Client Samples
+# Call Control Platform Clients
 
-[Call Control](https://callcontrol.com) Platform API provides access to millions of spam phone numbers and the biggest phone community blacklist in the world.
+[Call Control](https://www.callcontrol.com) Platform API provides access to millions of spam phone numbers and the biggest phone community blacklist in the world.
 
 [callcontrol.com/docs](https://callcontrol.com/docs) for detailed info, quickstarts and tutorials
 

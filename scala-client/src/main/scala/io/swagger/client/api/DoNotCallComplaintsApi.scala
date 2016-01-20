@@ -23,8 +23,8 @@ class DoNotCallComplaintsApi(val defBasePath: String = "https://www.callcontrol.
 
   
   /**
-   * &lt;br /&gt;\n&lt;b&gt;DoNotCallComplaints&lt;/b&gt;\n&lt;br /&gt;Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
-   * This is the main funciton to get data out of the call control reporting system&lt;br /&gt;\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
+   * &lt;br /&gt;\r\n&lt;b&gt;DoNotCallComplaints&lt;/b&gt;\r\n&lt;br /&gt;Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
+   * This is the main funciton to get data out of the call control reporting system&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
    * @param phoneNumber phone number to search
    * @return DoNotCallComplaints
    */
