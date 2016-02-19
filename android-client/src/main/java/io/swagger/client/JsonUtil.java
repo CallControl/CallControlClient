@@ -35,8 +35,8 @@ public class JsonUtil {
   public static Type getListTypeForDeserialization(Class cls) {
     String className = cls.getSimpleName();
     
-    if ("DoNotCallComplaints".equalsIgnoreCase(className)) {
-      return new TypeToken<List<DoNotCallComplaints>>(){}.getType();
+    if ("Complaints".equalsIgnoreCase(className)) {
+      return new TypeToken<List<Complaints>>(){}.getType();
     }
     
     if ("Reputation".equalsIgnoreCase(className)) {
@@ -47,18 +47,14 @@ public class JsonUtil {
       return new TypeToken<List<CallReport>>(){}.getType();
     }
     
-    if ("ReporterLoation".equalsIgnoreCase(className)) {
-      return new TypeToken<List<ReporterLoation>>(){}.getType();
-    }
-    
     return new TypeToken<List<Object>>(){}.getType();
   }
 
   public static Type getTypeForDeserialization(Class cls) {
     String className = cls.getSimpleName();
     
-    if ("DoNotCallComplaints".equalsIgnoreCase(className)) {
-      return new TypeToken<DoNotCallComplaints>(){}.getType();
+    if ("Complaints".equalsIgnoreCase(className)) {
+      return new TypeToken<Complaints>(){}.getType();
     }
     
     if ("Reputation".equalsIgnoreCase(className)) {
@@ -67,10 +63,6 @@ public class JsonUtil {
     
     if ("CallReport".equalsIgnoreCase(className)) {
       return new TypeToken<CallReport>(){}.getType();
-    }
-    
-    if ("ReporterLoation".equalsIgnoreCase(className)) {
-      return new TypeToken<ReporterLoation>(){}.getType();
     }
     
     return new TypeToken<Object>(){}.getType();

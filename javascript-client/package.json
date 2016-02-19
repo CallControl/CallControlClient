@@ -1,20 +1,16 @@
 {
   "name": "call-control-api",
   "version": "2015-11-01",
-  "description": "API for blocking phone calls with Call Control. Data is from crowdsourced community blacklist from 12+ million users and government agencies (FTC, FCC, IRS)<br/><br/>Try with api_key 'demo', hit explore above, and then try phone number 12012574082 (spam) 12061231234 (not spam)",
-  "license": "API License",
+  "description": "API for blocking phone calls with Call Control. Data is from crowdsourced community blacklist from 12+ million users and government agencies (FTC, FCC, IRS) Try with api_key 'demo', hit explore above, and then try phone numbers 18008472911,13157244022,17275567300,18008276655,12061231234.",
   "main": "src/index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive"
   },
   "dependencies": {
-    "jquery": "~2.1.4"
+    "superagent": "1.7.1"
   },
   "devDependencies": {
     "mocha": "~2.3.4",
-    "expect.js": "~0.3.1",
-    "mockrequire": "~0.0.5",
-    "domino": "~1.0.20",
-    "xmlhttprequest": "~1.8.0"
+    "expect.js": "~0.3.1"
   }
 }

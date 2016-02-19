@@ -1,6 +1,5 @@
 package io.swagger.client.model;
 
-import io.swagger.client.model.ReporterLoation;
 import java.util.Date;
 
 import io.swagger.annotations.*;
@@ -20,7 +19,7 @@ public class CallReport  {
   @SerializedName("ReportedCallerId")
   private String reportedCallerId = null;
   public enum CallerTypeEnum {
-     Unknown,  Telemarketing,  Collection_Agency,  Political,  Surveyor,  Prank_Call,  Fund_Raiser,  Other_Commercial,  Scam,  Pay_Phone,  Business,  Reminder_Notification_Call,  Junk_Fax,  Fax_Machine,  Spam_Text,  RoboCall,  NotSpam,  Callback, 
+     Unknown,  Telemarketing,  Collection_Agency,  Political,  Surveyor,  Prank_Call,  Fund_Raiser,  Other_Commercial,  Scam,  VOIP,  Business,  Reminder_Notification_Call,  Junk_Fax,  Fax_Machine,  Spam_Text,  RoboCall,  NotSpam,  Callback, 
   };
   @SerializedName("CallerType")
   private CallerTypeEnum callerType = null;
@@ -32,8 +31,12 @@ public class CallReport  {
   private Date callTime = null;
   @SerializedName("Reporter")
   private String reporter = null;
-  @SerializedName("ReporterLoation")
-  private ReporterLoation reporterLoation = null;
+  @SerializedName("IpAddress")
+  private String ipAddress = null;
+  @SerializedName("Latitude")
+  private Double latitude = null;
+  @SerializedName("Longitude")
+  private Double longitude = null;
 
   
   /**
@@ -127,11 +130,33 @@ public class CallReport  {
   /**
    **/
   @ApiModelProperty(value = "")
-  public ReporterLoation getReporterLoation() {
-    return reporterLoation;
+  public String getIpAddress() {
+    return ipAddress;
   }
-  public void setReporterLoation(ReporterLoation reporterLoation) {
-    this.reporterLoation = reporterLoation;
+  public void setIpAddress(String ipAddress) {
+    this.ipAddress = ipAddress;
+  }
+
+  
+  /**
+   **/
+  @ApiModelProperty(value = "")
+  public Double getLatitude() {
+    return latitude;
+  }
+  public void setLatitude(Double latitude) {
+    this.latitude = latitude;
+  }
+
+  
+  /**
+   **/
+  @ApiModelProperty(value = "")
+  public Double getLongitude() {
+    return longitude;
+  }
+  public void setLongitude(Double longitude) {
+    this.longitude = longitude;
   }
 
   
@@ -149,7 +174,9 @@ public class CallReport  {
     sb.append("  unwantedCall: ").append(unwantedCall).append("\n");
     sb.append("  callTime: ").append(callTime).append("\n");
     sb.append("  reporter: ").append(reporter).append("\n");
-    sb.append("  reporterLoation: ").append(reporterLoation).append("\n");
+    sb.append("  ipAddress: ").append(ipAddress).append("\n");
+    sb.append("  latitude: ").append(latitude).append("\n");
+    sb.append("  longitude: ").append(longitude).append("\n");
     sb.append("}\n");
     return sb.toString();
   }

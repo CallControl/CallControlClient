@@ -1,174 +1,104 @@
-// require files in Node.js environment
-var $, CallReport, Reputation;
-if (typeof module === 'object' && module.exports) {
-  $ = require('jquery');
-  CallReport = require('../model/CallReport.js');
-  Reputation = require('../model/Reputation.js');
-}
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['../ApiClient', '../model/CallReport', '../model/Reputation'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('../ApiClient'), require('../model/CallReport'), require('../model/Reputation'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.CallControlApi) {
+      root.CallControlApi = {};
+    }
+    root.CallControlApi.ReputationApi = factory(root.CallControlApi.ApiClient, root.CallControlApi.CallReport, root.CallControlApi.Reputation);
+  }
+}(this, function(ApiClient, CallReport, Reputation) {
+  'use strict';
 
-// export module for AMD
-if ( typeof define === "function" && define.amd ) {     
-	define(['jquery', 'CallReport', 'Reputation'], function($, CallReport, Reputation) {
-        return ReputationApi;
-	 });
-}
+  var ReputationApi = function ReputationApi(apiClient) {
+    this.apiClient = apiClient || ApiClient.default;
 
-var ReputationApi = function ReputationApi() {
-	var self = this;
-  
-  
-  /**
-   * &lt;br /&gt;\r\n&lt;b&gt;Report:&lt;/b&gt; report spam calls received to better tune our algorithms based upon spam calls you receive
-   * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
-   * @param {CallReport}  callReport [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
-   * @param {function} callback the callback function
-   * @return void
-   */
-  self.reputationReport = function(callReport, callback) {
-    var postBody = JSON.stringify(callReport);
-    var postBinaryBody = null;
+    var self = this;
     
-     // verify the required parameter 'callReport' is set
-     if (callReport == null) {
-        //throw new ApiException(400, "Missing the required parameter 'callReport' when calling reputationReport");
-        var errorRequiredMsg = "Missing the required parameter 'callReport' when calling reputationReport";
-        throw errorRequiredMsg;
-     }
-     
-    // create path and map variables
-    var basePath = 'https://www.callcontrol.com';
-    // if basePath ends with a /, remove it as path starts with a leading /
-    if (basePath.substring(basePath.length-1, basePath.length)=='/') {
-    	basePath = basePath.substring(0, basePath.length-1);
+    
+    /**
+     * Report: report spam calls received to better tune our algorithms based upon spam calls you receive
+     * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
+     * @param {CallReport}  callReport [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
+     * @param {function} callback the callback function, accepting three arguments: error, data, response
+     */
+    self.reputationReport = function(callReport, callback) {
+      var postBody = callReport;
+      
+      // verify the required parameter 'callReport' is set
+      if (callReport == null) {
+        throw "Missing the required parameter 'callReport' when calling reputationReport";
+      }
+      
+
+      
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var contentTypes = ['application/json', 'text/json', 'application/xml', 'text/xml', 'application/x-www-form-urlencoded'];
+      var accepts = ['application/json', 'text/json', 'application/xml', 'text/xml'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/api/2015-11-01/Report', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        contentTypes, accepts, returnType, callback
+      );
+      
     }
     
-    var path = basePath + replaceAll(replaceAll("/api/2015-11-01/Report", "\\{format\\}","json"));
-
-    var queryParams = {};
-    var headerParams =  {};
-    var formParams =  {};
-
-    
-    
-    
-
-    path += createQueryString(queryParams);
-
-    var options = {type: "POST", async: true, contentType: "application/json", dataType: "json", data: postBody};
-    var request = $.ajax(path, options);
-
-    request.fail(function(jqXHR, textStatus, errorThrown){
-      if (callback) {
-        var error = errorThrown || textStatus || jqXHR.statusText || 'error';
-        callback(null, textStatus, jqXHR, error);
-      }
-    });
-		
-    request.done(function(response, textStatus, jqXHR){
+    /**
+     * Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.
+     * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
+     * @param {String}  phoneNumber phone number to search
+     * @param {function} callback the callback function, accepting three arguments: error, data, response
+     *   data is of type: Reputation
+     */
+    self.reputationReputation = function(phoneNumber, callback) {
+      var postBody = null;
       
-      if (callback) {
-        callback(response, textStatus, jqXHR);
+      // verify the required parameter 'phoneNumber' is set
+      if (phoneNumber == null) {
+        throw "Missing the required parameter 'phoneNumber' when calling reputationReputation";
       }
       
-    });
- 
-    return request;
-  }
-  
-  /**
-   * &lt;br /&gt;\r\n&lt;b&gt;Reputation&lt;/b&gt;\r\n&lt;br /&gt;\r\n            Premium service which returns a reputation informaiton of a phone number via API.
-   * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
-   * @param {String}  phoneNumber phone number to search
-   * @param {function} callback the callback function
-   * @return Reputation
-   */
-  self.reputationReputation = function(phoneNumber, callback) {
-    var postBody = null;
-    var postBinaryBody = null;
-    
-     // verify the required parameter 'phoneNumber' is set
-     if (phoneNumber == null) {
-        //throw new ApiException(400, "Missing the required parameter 'phoneNumber' when calling reputationReputation");
-        var errorRequiredMsg = "Missing the required parameter 'phoneNumber' when calling reputationReputation";
-        throw errorRequiredMsg;
-     }
-     
-    // create path and map variables
-    var basePath = 'https://www.callcontrol.com';
-    // if basePath ends with a /, remove it as path starts with a leading /
-    if (basePath.substring(basePath.length-1, basePath.length)=='/') {
-    	basePath = basePath.substring(0, basePath.length-1);
+
+      
+      var pathParams = {
+        'phoneNumber': phoneNumber
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var contentTypes = [];
+      var accepts = ['application/json', 'text/json', 'application/xml', 'text/xml'];
+      var returnType = Reputation;
+
+      return this.apiClient.callApi(
+        '/api/2015-11-01/Reputation/{phoneNumber}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        contentTypes, accepts, returnType, callback
+      );
+      
     }
     
-    var path = basePath + replaceAll(replaceAll("/api/2015-11-01/Reputation/{phoneNumber}", "\\{format\\}","json")
-, "\\{" + "phoneNumber" + "\\}", encodeURIComponent(phoneNumber.toString()));
-
-    var queryParams = {};
-    var headerParams =  {};
-    var formParams =  {};
-
     
-    
-    
+  };
 
-    path += createQueryString(queryParams);
-
-    var options = {type: "GET", async: true, contentType: "application/json", dataType: "json", data: postBody};
-    var request = $.ajax(path, options);
-
-    request.fail(function(jqXHR, textStatus, errorThrown){
-      if (callback) {
-        var error = errorThrown || textStatus || jqXHR.statusText || 'error';
-        callback(null, textStatus, jqXHR, error);
-      }
-    });
-		
-    request.done(function(response, textStatus, jqXHR){
-      
-      /**
-        * @returns Reputation
-        */
-      
-      var myResponse = new Reputation();
-      myResponse.constructFromObject(response);
-      if (callback) {
-        callback(myResponse, textStatus, jqXHR);
-      }
-      
-    });
- 
-    return request;
-  }
-  
-  
-
- 	function replaceAll (haystack, needle, replace) {
-		var result= haystack;
-		if (needle !=null && replace!=null) {
-			result= haystack.replace(new RegExp(needle, 'g'), replace);
-		}
-		return result;
-	}
-
- 	function createQueryString (queryParams) {
-		var queryString ='';
-		var i = 0;
-		for (var queryParamName in queryParams) {
-			if (i==0) {
-				queryString += '?' ;
-			} else {
-				queryString += '&' ;
-			}
-			
-			queryString +=  queryParamName + '=' + encodeURIComponent(queryParams[queryParamName]);
-			i++;
-		}
-		
-		return queryString;
-	}
-}
-
-// export module for Node.js
-if (typeof module === 'object' && module.exports) {
-  module.exports = ReputationApi;
-}
+  return ReputationApi;
+}));

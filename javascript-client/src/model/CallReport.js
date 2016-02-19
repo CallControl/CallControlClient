@@ -1,334 +1,384 @@
-// require files in Node.js environment
-var ReporterLoation;
-if (typeof module === 'object' && module.exports) {
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define([undefined, '../ApiClient'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(undefined, require('../ApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.CallControlApi) {
+      root.CallControlApi = {};
+    }
+    factory(root.CallControlApi, root.CallControlApi.ApiClient);
+  }
+}(this, function(module, ApiClient) {
+  'use strict';
+
   
-  ReporterLoation = require('./ReporterLoation.js');
-}
-
-
-
+  
 //export module
-if ( typeof define === "function" && define.amd ) {     
-	define('CallerTypeEnum', ['jquery'], function($) {
+if ( typeof define === "function" && define.amd ) {
+	define('CallerTypeEnum', [], function() {
         return CallerTypeEnum;
 	 });
 }
 
 var CallerTypeEnum = function CallerTypeEnum() {
 	var self = this;
-	
+
 
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.UNKNOWN = "Unknown",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.TELEMARKETING = "Telemarketing",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.COLLECTION_AGENCY = "Collection_Agency",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.POLITICAL = "Political",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.SURVEYOR = "Surveyor",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.PRANK_CALL = "Prank_Call",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.FUND_RAISER = "Fund_Raiser",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.OTHER_COMMERCIAL = "Other_Commercial",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.SCAM = "Scam",
 	
 	/**
-	 * @const 
-	 */ 
-	self.PAY_PHONE = "Pay_Phone",
+	 * @const
+	 */
+	self.VOIP = "VOIP",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.BUSINESS = "Business",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.REMINDER_NOTIFICATION_CALL = "Reminder_Notification_Call",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.JUNK_FAX = "Junk_Fax",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.FAX_MACHINE = "Fax_Machine",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.SPAM_TEXT = "Spam_Text",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.ROBOCALL = "RoboCall",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.NOTSPAM = "NotSpam",
 	
 	/**
-	 * @const 
-	 */ 
+	 * @const
+	 */
 	self.CALLBACK = "Callback";
 
 }
 
 
-//export module
-if ( typeof define === "function" && define.amd ) {
-  define('CallReport', ['jquery''ReporterLoation'],
-    function($ReporterLoation) {
-      return CallReport;
-   });
-}
+  /**
+   * Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
+   **/
+  var CallReport = function CallReport() { 
+    var self = this;
+    
+    /**
+     * datatype: String
+     **/
+    self['PhoneNumber'] = null;
+    
+    /**
+     * datatype: String
+     **/
+    self['ReportedCallerName'] = null;
+    
+    /**
+     * datatype: String
+     **/
+    self['ReportedCallerId'] = null;
+    
+    /**
+     * datatype: CallerTypeEnum
+     **/
+    self['CallerType'] = null;
+    
+    /**
+     * datatype: String
+     **/
+    self['Comment'] = null;
+    
+    /**
+     * datatype: Boolean
+     **/
+    self['UnwantedCall'] = null;
+    
+    /**
+     * datatype: Date
+     **/
+    self['CallTime'] = null;
+    
+    /**
+     * datatype: String
+     **/
+    self['Reporter'] = null;
+    
+    /**
+     * datatype: String
+     **/
+    self['IpAddress'] = null;
+    
+    /**
+     * datatype: Number
+     **/
+    self['Latitude'] = null;
+    
+    /**
+     * datatype: Number
+     **/
+    self['Longitude'] = null;
+    
 
-/**
- * Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
- **/
-var CallReport = function CallReport() { 
-  var self = this;
-  
-  /**
-   * datatype: String
-   **/
-  self.phoneNumber = null;
-  
-  /**
-   * datatype: String
-   **/
-  self.reportedCallerName = null;
-  
-  /**
-   * datatype: String
-   **/
-  self.reportedCallerId = null;
-  
-  /**
-   * datatype: CallerTypeEnum
-   **/
-  self.callerType = null;
-  
-  /**
-   * datatype: String
-   **/
-  self.comment = null;
-  
-  /**
-   * datatype: Boolean
-   **/
-  self.unwantedCall = null;
-  
-  /**
-   * datatype: Date
-   **/
-  self.callTime = null;
-  
-  /**
-   * datatype: String
-   **/
-  self.reporter = null;
-  
-  /**
-   * datatype: ReporterLoation
-   **/
-  self.reporterLoation = new ReporterLoation();
-  
-  
-  self.constructFromObject = function(data) {
-    if (!data) {
-      return;
+    self.constructFromObject = function(data) {
+      if (!data) {
+        return this;
+      }
+      
+      self['PhoneNumber'] = ApiClient.convertToType(data['PhoneNumber'], 'String');
+      
+      self['ReportedCallerName'] = ApiClient.convertToType(data['ReportedCallerName'], 'String');
+      
+      self['ReportedCallerId'] = ApiClient.convertToType(data['ReportedCallerId'], 'String');
+      
+      self['CallerType'] = ApiClient.convertToType(data['CallerType'], 'String');
+      
+      self['Comment'] = ApiClient.convertToType(data['Comment'], 'String');
+      
+      self['UnwantedCall'] = ApiClient.convertToType(data['UnwantedCall'], 'Boolean');
+      
+      self['CallTime'] = ApiClient.convertToType(data['CallTime'], 'Date');
+      
+      self['Reporter'] = ApiClient.convertToType(data['Reporter'], 'String');
+      
+      self['IpAddress'] = ApiClient.convertToType(data['IpAddress'], 'String');
+      
+      self['Latitude'] = ApiClient.convertToType(data['Latitude'], 'Number');
+      
+      self['Longitude'] = ApiClient.convertToType(data['Longitude'], 'Number');
+      
+      return this;
+    }
+
+    
+    /**
+     * @return {String}
+     **/
+    self.getPhoneNumber = function() {
+      return self['PhoneNumber'];
+    }
+
+    /**
+     * @param {String} phoneNumber
+     **/
+    self.setPhoneNumber = function(phoneNumber) {
+      self['PhoneNumber'] = phoneNumber;
     }
     
-    self.phoneNumber = data.PhoneNumber;
+    /**
+     * @return {String}
+     **/
+    self.getReportedCallerName = function() {
+      return self['ReportedCallerName'];
+    }
+
+    /**
+     * @param {String} reportedCallerName
+     **/
+    self.setReportedCallerName = function(reportedCallerName) {
+      self['ReportedCallerName'] = reportedCallerName;
+    }
     
-    self.reportedCallerName = data.ReportedCallerName;
+    /**
+     * @return {String}
+     **/
+    self.getReportedCallerId = function() {
+      return self['ReportedCallerId'];
+    }
+
+    /**
+     * @param {String} reportedCallerId
+     **/
+    self.setReportedCallerId = function(reportedCallerId) {
+      self['ReportedCallerId'] = reportedCallerId;
+    }
     
-    self.reportedCallerId = data.ReportedCallerId;
+    /**
+     * @return {CallerTypeEnum}
+     **/
+    self.getCallerType = function() {
+      return self['CallerType'];
+    }
+
+    /**
+     * @param {CallerTypeEnum} callerType
+     **/
+    self.setCallerType = function(callerType) {
+      self['CallerType'] = callerType;
+    }
     
-    self.callerType = data.CallerType;
+    /**
+     * @return {String}
+     **/
+    self.getComment = function() {
+      return self['Comment'];
+    }
+
+    /**
+     * @param {String} comment
+     **/
+    self.setComment = function(comment) {
+      self['Comment'] = comment;
+    }
     
-    self.comment = data.Comment;
+    /**
+     * @return {Boolean}
+     **/
+    self.getUnwantedCall = function() {
+      return self['UnwantedCall'];
+    }
+
+    /**
+     * @param {Boolean} unwantedCall
+     **/
+    self.setUnwantedCall = function(unwantedCall) {
+      self['UnwantedCall'] = unwantedCall;
+    }
     
-    self.unwantedCall = data.UnwantedCall;
+    /**
+     * @return {Date}
+     **/
+    self.getCallTime = function() {
+      return self['CallTime'];
+    }
+
+    /**
+     * @param {Date} callTime
+     **/
+    self.setCallTime = function(callTime) {
+      self['CallTime'] = callTime;
+    }
     
-    self.callTime = data.CallTime;
+    /**
+     * @return {String}
+     **/
+    self.getReporter = function() {
+      return self['Reporter'];
+    }
+
+    /**
+     * @param {String} reporter
+     **/
+    self.setReporter = function(reporter) {
+      self['Reporter'] = reporter;
+    }
     
-    self.reporter = data.Reporter;
+    /**
+     * @return {String}
+     **/
+    self.getIpAddress = function() {
+      return self['IpAddress'];
+    }
+
+    /**
+     * @param {String} ipAddress
+     **/
+    self.setIpAddress = function(ipAddress) {
+      self['IpAddress'] = ipAddress;
+    }
     
-    self.reporterLoation.constructFromObject(data.ReporterLoation);
+    /**
+     * @return {Number}
+     **/
+    self.getLatitude = function() {
+      return self['Latitude'];
+    }
+
+    /**
+     * @param {Number} latitude
+     **/
+    self.setLatitude = function(latitude) {
+      self['Latitude'] = latitude;
+    }
     
+    /**
+     * @return {Number}
+     **/
+    self.getLongitude = function() {
+      return self['Longitude'];
+    }
+
+    /**
+     * @param {Number} longitude
+     **/
+    self.setLongitude = function(longitude) {
+      self['Longitude'] = longitude;
+    }
+    
+
+    self.toJson = function() {
+      return JSON.stringify(self);
+    }
+  };
+
+  if (module) {
+    module.CallReport = CallReport;
   }
 
+  return CallReport;
   
-  /**
-   * @return {String}
-   **/
-  self.getPhoneNumber = function() {
-    return self.phoneNumber;
-  }
-
-  /**
-   * @param {String} phoneNumber
-   **/
-  self.setPhoneNumber = function (phoneNumber) {
-    self.phoneNumber = phoneNumber;
-  }
   
-  /**
-   * @return {String}
-   **/
-  self.getReportedCallerName = function() {
-    return self.reportedCallerName;
-  }
-
-  /**
-   * @param {String} reportedCallerName
-   **/
-  self.setReportedCallerName = function (reportedCallerName) {
-    self.reportedCallerName = reportedCallerName;
-  }
-  
-  /**
-   * @return {String}
-   **/
-  self.getReportedCallerId = function() {
-    return self.reportedCallerId;
-  }
-
-  /**
-   * @param {String} reportedCallerId
-   **/
-  self.setReportedCallerId = function (reportedCallerId) {
-    self.reportedCallerId = reportedCallerId;
-  }
-  
-  /**
-   * @return {CallerTypeEnum}
-   **/
-  self.getCallerType = function() {
-    return self.callerType;
-  }
-
-  /**
-   * @param {CallerTypeEnum} callerType
-   **/
-  self.setCallerType = function (callerType) {
-    self.callerType = callerType;
-  }
-  
-  /**
-   * @return {String}
-   **/
-  self.getComment = function() {
-    return self.comment;
-  }
-
-  /**
-   * @param {String} comment
-   **/
-  self.setComment = function (comment) {
-    self.comment = comment;
-  }
-  
-  /**
-   * @return {Boolean}
-   **/
-  self.getUnwantedCall = function() {
-    return self.unwantedCall;
-  }
-
-  /**
-   * @param {Boolean} unwantedCall
-   **/
-  self.setUnwantedCall = function (unwantedCall) {
-    self.unwantedCall = unwantedCall;
-  }
-  
-  /**
-   * @return {Date}
-   **/
-  self.getCallTime = function() {
-    return self.callTime;
-  }
-
-  /**
-   * @param {Date} callTime
-   **/
-  self.setCallTime = function (callTime) {
-    self.callTime = callTime;
-  }
-  
-  /**
-   * @return {String}
-   **/
-  self.getReporter = function() {
-    return self.reporter;
-  }
-
-  /**
-   * @param {String} reporter
-   **/
-  self.setReporter = function (reporter) {
-    self.reporter = reporter;
-  }
-  
-  /**
-   * @return {ReporterLoation}
-   **/
-  self.getReporterLoation = function() {
-    return self.reporterLoation;
-  }
-
-  /**
-   * @param {ReporterLoation} reporterLoation
-   **/
-  self.setReporterLoation = function (reporterLoation) {
-    self.reporterLoation = reporterLoation;
-  }
-  
-
-  self.toJson = function () {
-    return JSON.stringify(self);
-  }
-}
-
-if (typeof module === 'object' && module.exports) {
-  module.exports = CallReport;
-}
+}));

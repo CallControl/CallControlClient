@@ -11,39 +11,41 @@ import http = require('http');
 /**
 * Free service (with registration) which serves Government Do Not Call data via API \r\n            Search via phone number returns available data, reported name, total complaints
 */
-export class DoNotCallComplaints {
+export class Complaints {
     /**
     * Reported Caller Name
     */
-    reportedCallerName: string;
-    totalNumberOfComplaints: number;
-    complaintsByEntity: { [key: string]: number; };
-    lastCompaintDate: Date;
-    tags: Array<string>;
+    "reportedCallerName": string;
+    "totalNumberOfComplaints": number;
+    "complaintsByEntity": { [key: string]: number; };
+    "lastCompaintDate": Date;
+    "tags": Array<string>;
 }
 
 export class Reputation {
-    callType: string;
-    confidence: number;
-    isSpam: boolean;
-    lastCompaintDate: Date;
-    reportedCallerName: string;
-    tags: Array<string>;
+    "callType": string;
+    "confidence": number;
+    "isSpam": boolean;
+    "lastCompaintDate": Date;
+    "reportedCallerName": string;
+    "tags": Array<string>;
 }
 
 /**
 * Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
 */
 export class CallReport {
-    phoneNumber: string;
-    reportedCallerName: string;
-    reportedCallerId: string;
-    callerType: CallReport.CallerTypeEnum;
-    comment: string;
-    unwantedCall: boolean;
-    callTime: Date;
-    reporter: string;
-    reporterLoation: ReporterLoation;
+    "phoneNumber": string;
+    "reportedCallerName": string;
+    "reportedCallerId": string;
+    "callerType": CallReport.CallerTypeEnum;
+    "comment": string;
+    "unwantedCall": boolean;
+    "callTime": Date;
+    "reporter": string;
+    "ipAddress": string;
+    "latitude": number;
+    "longitude": number;
 }
 
 export namespace CallReport {
@@ -57,7 +59,7 @@ export namespace CallReport {
         Fund_Raiser = <any> 'Fund_Raiser',
         Other_Commercial = <any> 'Other_Commercial',
         Scam = <any> 'Scam',
-        Pay_Phone = <any> 'Pay_Phone',
+        VOIP = <any> 'VOIP',
         Business = <any> 'Business',
         Reminder_Notification_Call = <any> 'Reminder_Notification_Call',
         Junk_Fax = <any> 'Junk_Fax',
@@ -65,15 +67,9 @@ export namespace CallReport {
         Spam_Text = <any> 'Spam_Text',
         RoboCall = <any> 'RoboCall',
         NotSpam = <any> 'NotSpam',
-        Callback = <any> 'Callback',
+        Callback = <any> 'Callback'
     }
 }
-export class ReporterLoation {
-    ipAddress: string;
-    latitude: number;
-    longitude: number;
-}
-
 
 interface Authentication {
     /**
@@ -123,6 +119,96 @@ class VoidAuth implements Authentication {
     }
 }
 
+export class ComplaintsApi {
+    protected basePath = 'https://www.callcontrol.com';
+    protected defaultHeaders : any = {};
+
+
+
+    public authentications = {
+        'default': <Authentication>new VoidAuth(),
+        'apiKey': new ApiKeyAuth('header', 'apiKey'),
+    }
+
+    constructor(basePath?: string);
+    constructor(basePathOrUsername: string, password?: string, basePath?: string) {
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        } else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername
+            }
+        }
+    }
+
+    set apiKey(key: string) {
+        this.authentications.apiKey.apiKey = key;
+    }
+    private extendObj<T1,T2>(objA: T1, objB: T2) {
+        for(let key in objB){
+            if(objB.hasOwnProperty(key)){
+                objA[key] = objB[key];
+            }
+        }
+        return <T1&T2>objA;
+    }
+    /**
+     * Complaints: Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
+     * This is the main funciton to get data out of the call control reporting system&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
+     * @param phoneNumber phone number to search
+     */
+    public complaintsComplaints (phoneNumber: string) : Promise<{ response: http.ClientResponse; body: Complaints;  }> {
+        const path = this.basePath + '/api/2015-11-01/Complaints/{phoneNumber}'
+            .replace('{' + 'phoneNumber' + '}', String(phoneNumber));
+        let queryParameters: any = {};
+        let headerParams: any = this.extendObj({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'phoneNumber' is set
+        if (!phoneNumber) {
+            throw new Error('Missing required parameter phoneNumber when calling complaintsComplaints');
+        }
+
+        let useFormData = false;
+
+        let deferred = promise.defer<{ response: http.ClientResponse; body: Complaints;  }>();
+
+        let requestOptions: request.Options = {
+            method: 'GET',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: path,
+            json: true,
+        }
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+
+        request(requestOptions, (error, response, body) => {
+            if (error) {
+                deferred.reject(error);
+            } else {
+                if (response.statusCode >= 200 && response.statusCode <= 299) {
+                    deferred.resolve({ response: response, body: body });
+                } else {
+                    deferred.reject({ response: response, body: body });
+                }
+            }
+        });
+
+        return deferred.promise;
+    }
+}
 export class ReputationApi {
     protected basePath = 'https://www.callcontrol.com';
     protected defaultHeaders : any = {};
@@ -159,8 +245,8 @@ export class ReputationApi {
         return <T1&T2>objA;
     }
     /**
-     * &lt;br /&gt;\r\n&lt;b&gt;Report:&lt;/b&gt; report spam calls received to better tune our algorithms based upon spam calls you receive
-     * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
+     * Report: report spam calls received to better tune our algorithms based upon spam calls you receive
+     * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
      * @param callReport [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
      */
     public reputationReport (callReport: CallReport) : Promise<{ response: http.ClientResponse; body?: any;  }> {
@@ -213,8 +299,8 @@ export class ReputationApi {
         return deferred.promise;
     }
     /**
-     * &lt;br /&gt;\r\n&lt;b&gt;Reputation&lt;/b&gt;\r\n&lt;br /&gt;\r\n            Premium service which returns a reputation informaiton of a phone number via API.
-     * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
+     * Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.
+     * This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
      * @param phoneNumber phone number to search
      */
     public reputationReputation (phoneNumber: string) : Promise<{ response: http.ClientResponse; body: Reputation;  }> {
@@ -233,96 +319,6 @@ export class ReputationApi {
         let useFormData = false;
 
         let deferred = promise.defer<{ response: http.ClientResponse; body: Reputation;  }>();
-
-        let requestOptions: request.Options = {
-            method: 'GET',
-            qs: queryParameters,
-            headers: headerParams,
-            uri: path,
-            json: true,
-        }
-
-        this.authentications.default.applyToRequest(requestOptions);
-
-        if (Object.keys(formParams).length) {
-            if (useFormData) {
-                (<any>requestOptions).formData = formParams;
-            } else {
-                requestOptions.form = formParams;
-            }
-        }
-
-        request(requestOptions, (error, response, body) => {
-            if (error) {
-                deferred.reject(error);
-            } else {
-                if (response.statusCode >= 200 && response.statusCode <= 299) {
-                    deferred.resolve({ response: response, body: body });
-                } else {
-                    deferred.reject({ response: response, body: body });
-                }
-            }
-        });
-
-        return deferred.promise;
-    }
-}
-export class DoNotCallComplaintsApi {
-    protected basePath = 'https://www.callcontrol.com';
-    protected defaultHeaders : any = {};
-
-
-
-    public authentications = {
-        'default': <Authentication>new VoidAuth(),
-        'apiKey': new ApiKeyAuth('header', 'apiKey'),
-    }
-
-    constructor(basePath?: string);
-    constructor(basePathOrUsername: string, password?: string, basePath?: string) {
-        if (password) {
-            if (basePath) {
-                this.basePath = basePath;
-            }
-        } else {
-            if (basePathOrUsername) {
-                this.basePath = basePathOrUsername
-            }
-        }
-    }
-
-    set apiKey(key: string) {
-        this.authentications.apiKey.apiKey = key;
-    }
-    private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for(let key in objB){
-            if(objB.hasOwnProperty(key)){
-                objA[key] = objB[key];
-            }
-        }
-        return <T1&T2>objA;
-    }
-    /**
-     * &lt;br /&gt;\r\n&lt;b&gt;DoNotCallComplaints&lt;/b&gt;\r\n&lt;br /&gt;Free service (with registration), providing community and government complaint lookup by phone number for up to 2,000 queries per month.  Details include number complaint rates from (FTC, FCC, IRS, Indiana Attorney  General) and key entity tag extractions from complaints.
-     * This is the main funciton to get data out of the call control reporting system&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone number 12674070100 (spam) 12061231234 (not spam)
-     * @param phoneNumber phone number to search
-     */
-    public doNotCallComplaintsDoNotCallComplaints (phoneNumber: string) : Promise<{ response: http.ClientResponse; body: DoNotCallComplaints;  }> {
-        const path = this.basePath + '/api/2015-11-01/DoNotCallComplaints/{phoneNumber}'
-            .replace('{' + 'phoneNumber' + '}', String(phoneNumber));
-        let queryParameters: any = {};
-        let headerParams: any = this.extendObj({}, this.defaultHeaders);
-        let formParams: any = {};
-
-
-        // verify required parameter 'phoneNumber' is set
-        if (!phoneNumber) {
-            throw new Error('Missing required parameter phoneNumber when calling doNotCallComplaintsDoNotCallComplaints');
-        }
-
-        let useFormData = false;
-
-        let deferred = promise.defer<{ response: http.ClientResponse; body: DoNotCallComplaints;  }>();
 
         let requestOptions: request.Options = {
             method: 'GET',

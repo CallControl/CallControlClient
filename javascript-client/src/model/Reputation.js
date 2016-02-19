@@ -1,165 +1,174 @@
-// require files in Node.js environment
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define([undefined, '../ApiClient'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(undefined, require('../ApiClient'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.CallControlApi) {
+      root.CallControlApi = {};
+    }
+    factory(root.CallControlApi, root.CallControlApi.ApiClient);
+  }
+}(this, function(module, ApiClient) {
+  'use strict';
 
-if (typeof module === 'object' && module.exports) {
   
-}
+  
 
+  
+  var Reputation = function Reputation() { 
+    var self = this;
+    
+    /**
+     * datatype: String
+     **/
+    self['CallType'] = null;
+    
+    /**
+     * datatype: Integer
+     **/
+    self['Confidence'] = null;
+    
+    /**
+     * datatype: Boolean
+     **/
+    self['IsSpam'] = null;
+    
+    /**
+     * datatype: Date
+     **/
+    self['LastCompaintDate'] = null;
+    
+    /**
+     * datatype: String
+     **/
+    self['ReportedCallerName'] = null;
+    
+    /**
+     * datatype: [String]
+     **/
+    self['Tags'] = [];
+    
 
+    self.constructFromObject = function(data) {
+      if (!data) {
+        return this;
+      }
+      
+      self['CallType'] = ApiClient.convertToType(data['CallType'], 'String');
+      
+      self['Confidence'] = ApiClient.convertToType(data['Confidence'], 'Integer');
+      
+      self['IsSpam'] = ApiClient.convertToType(data['IsSpam'], 'Boolean');
+      
+      self['LastCompaintDate'] = ApiClient.convertToType(data['LastCompaintDate'], 'Date');
+      
+      self['ReportedCallerName'] = ApiClient.convertToType(data['ReportedCallerName'], 'String');
+      
+      self['Tags'] = ApiClient.convertToType(data['Tags'], ['String']);
+      
+      return this;
+    }
 
+    
+    /**
+     * @return {String}
+     **/
+    self.getCallType = function() {
+      return self['CallType'];
+    }
 
-//export module
-if ( typeof define === "function" && define.amd ) {
-  define('Reputation', ['jquery'],
-    function($) {
-      return Reputation;
-   });
-}
-
-
-var Reputation = function Reputation() { 
-  var self = this;
-  
-  /**
-   * datatype: String
-   **/
-  self.callType = null;
-  
-  /**
-   * datatype: Integer
-   **/
-  self.confidence = null;
-  
-  /**
-   * datatype: Boolean
-   **/
-  self.isSpam = null;
-  
-  /**
-   * datatype: Date
-   **/
-  self.lastCompaintDate = null;
-  
-  /**
-   * datatype: String
-   **/
-  self.reportedCallerName = null;
-  
-  /**
-   * datatype: Array
-   **/
-  self.tags = [];
-  
-  
-  self.constructFromObject = function(data) {
-    if (!data) {
-      return;
+    /**
+     * @param {String} callType
+     **/
+    self.setCallType = function(callType) {
+      self['CallType'] = callType;
     }
     
-    self.callType = data.CallType;
+    /**
+     * @return {Integer}
+     **/
+    self.getConfidence = function() {
+      return self['Confidence'];
+    }
+
+    /**
+     * @param {Integer} confidence
+     **/
+    self.setConfidence = function(confidence) {
+      self['Confidence'] = confidence;
+    }
     
-    self.confidence = data.Confidence;
+    /**
+     * @return {Boolean}
+     **/
+    self.getIsSpam = function() {
+      return self['IsSpam'];
+    }
+
+    /**
+     * @param {Boolean} isSpam
+     **/
+    self.setIsSpam = function(isSpam) {
+      self['IsSpam'] = isSpam;
+    }
     
-    self.isSpam = data.IsSpam;
+    /**
+     * @return {Date}
+     **/
+    self.getLastCompaintDate = function() {
+      return self['LastCompaintDate'];
+    }
+
+    /**
+     * @param {Date} lastCompaintDate
+     **/
+    self.setLastCompaintDate = function(lastCompaintDate) {
+      self['LastCompaintDate'] = lastCompaintDate;
+    }
     
-    self.lastCompaintDate = data.LastCompaintDate;
+    /**
+     * @return {String}
+     **/
+    self.getReportedCallerName = function() {
+      return self['ReportedCallerName'];
+    }
+
+    /**
+     * @param {String} reportedCallerName
+     **/
+    self.setReportedCallerName = function(reportedCallerName) {
+      self['ReportedCallerName'] = reportedCallerName;
+    }
     
-    self.reportedCallerName = data.ReportedCallerName;
+    /**
+     * @return {[String]}
+     **/
+    self.getTags = function() {
+      return self['Tags'];
+    }
+
+    /**
+     * @param {[String]} tags
+     **/
+    self.setTags = function(tags) {
+      self['Tags'] = tags;
+    }
     
-    self.tags = new Array();
-    
+
+    self.toJson = function() {
+      return JSON.stringify(self);
+    }
+  };
+
+  if (module) {
+    module.Reputation = Reputation;
   }
 
+  return Reputation;
   
-  /**
-   * @return {String}
-   **/
-  self.getCallType = function() {
-    return self.callType;
-  }
-
-  /**
-   * @param {String} callType
-   **/
-  self.setCallType = function (callType) {
-    self.callType = callType;
-  }
   
-  /**
-   * @return {Integer}
-   **/
-  self.getConfidence = function() {
-    return self.confidence;
-  }
-
-  /**
-   * @param {Integer} confidence
-   **/
-  self.setConfidence = function (confidence) {
-    self.confidence = confidence;
-  }
-  
-  /**
-   * @return {Boolean}
-   **/
-  self.getIsSpam = function() {
-    return self.isSpam;
-  }
-
-  /**
-   * @param {Boolean} isSpam
-   **/
-  self.setIsSpam = function (isSpam) {
-    self.isSpam = isSpam;
-  }
-  
-  /**
-   * @return {Date}
-   **/
-  self.getLastCompaintDate = function() {
-    return self.lastCompaintDate;
-  }
-
-  /**
-   * @param {Date} lastCompaintDate
-   **/
-  self.setLastCompaintDate = function (lastCompaintDate) {
-    self.lastCompaintDate = lastCompaintDate;
-  }
-  
-  /**
-   * @return {String}
-   **/
-  self.getReportedCallerName = function() {
-    return self.reportedCallerName;
-  }
-
-  /**
-   * @param {String} reportedCallerName
-   **/
-  self.setReportedCallerName = function (reportedCallerName) {
-    self.reportedCallerName = reportedCallerName;
-  }
-  
-  /**
-   * @return {Array}
-   **/
-  self.getTags = function() {
-    return self.tags;
-  }
-
-  /**
-   * @param {Array} tags
-   **/
-  self.setTags = function (tags) {
-    self.tags = tags;
-  }
-  
-
-  self.toJson = function () {
-    return JSON.stringify(self);
-  }
-}
-
-if (typeof module === 'object' && module.exports) {
-  module.exports = Reputation;
-}
+}));

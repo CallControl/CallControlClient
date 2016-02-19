@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
@@ -14,7 +15,7 @@ namespace IO.Swagger.Model
     /// Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
     /// </summary>
     [DataContract]
-    public class CallReport :  IEquatable<CallReport>
+    public partial class CallReport :  IEquatable<CallReport>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CallReport" /> class.
@@ -82,10 +83,24 @@ namespace IO.Swagger.Model
   
         
         /// <summary>
-        /// Gets or Sets ReporterLoation
+        /// Gets or Sets IpAddress
         /// </summary>
-        [DataMember(Name="ReporterLoation", EmitDefaultValue=false)]
-        public ReporterLoation ReporterLoation { get; set; }
+        [DataMember(Name="IpAddress", EmitDefaultValue=false)]
+        public string IpAddress { get; set; }
+  
+        
+        /// <summary>
+        /// Gets or Sets Latitude
+        /// </summary>
+        [DataMember(Name="Latitude", EmitDefaultValue=false)]
+        public double? Latitude { get; set; }
+  
+        
+        /// <summary>
+        /// Gets or Sets Longitude
+        /// </summary>
+        [DataMember(Name="Longitude", EmitDefaultValue=false)]
+        public double? Longitude { get; set; }
   
         
   
@@ -105,7 +120,9 @@ namespace IO.Swagger.Model
             sb.Append("  UnwantedCall: ").Append(UnwantedCall).Append("\n");
             sb.Append("  CallTime: ").Append(CallTime).Append("\n");
             sb.Append("  Reporter: ").Append(Reporter).Append("\n");
-            sb.Append("  ReporterLoation: ").Append(ReporterLoation).Append("\n");
+            sb.Append("  IpAddress: ").Append(IpAddress).Append("\n");
+            sb.Append("  Latitude: ").Append(Latitude).Append("\n");
+            sb.Append("  Longitude: ").Append(Longitude).Append("\n");
             
             sb.Append("}\n");
             return sb.ToString();
@@ -184,9 +201,19 @@ namespace IO.Swagger.Model
                     this.Reporter.Equals(other.Reporter)
                 ) && 
                 (
-                    this.ReporterLoation == other.ReporterLoation ||
-                    this.ReporterLoation != null &&
-                    this.ReporterLoation.Equals(other.ReporterLoation)
+                    this.IpAddress == other.IpAddress ||
+                    this.IpAddress != null &&
+                    this.IpAddress.Equals(other.IpAddress)
+                ) && 
+                (
+                    this.Latitude == other.Latitude ||
+                    this.Latitude != null &&
+                    this.Latitude.Equals(other.Latitude)
+                ) && 
+                (
+                    this.Longitude == other.Longitude ||
+                    this.Longitude != null &&
+                    this.Longitude.Equals(other.Longitude)
                 );
         }
 
@@ -203,31 +230,37 @@ namespace IO.Swagger.Model
                 // Suitable nullity checks etc, of course :)
                 
                 if (this.PhoneNumber != null)
-                    hash = hash * 57 + this.PhoneNumber.GetHashCode();
+                    hash = hash * 59 + this.PhoneNumber.GetHashCode();
                 
                 if (this.ReportedCallerName != null)
-                    hash = hash * 57 + this.ReportedCallerName.GetHashCode();
+                    hash = hash * 59 + this.ReportedCallerName.GetHashCode();
                 
                 if (this.ReportedCallerId != null)
-                    hash = hash * 57 + this.ReportedCallerId.GetHashCode();
+                    hash = hash * 59 + this.ReportedCallerId.GetHashCode();
                 
                 if (this.CallerType != null)
-                    hash = hash * 57 + this.CallerType.GetHashCode();
+                    hash = hash * 59 + this.CallerType.GetHashCode();
                 
                 if (this.Comment != null)
-                    hash = hash * 57 + this.Comment.GetHashCode();
+                    hash = hash * 59 + this.Comment.GetHashCode();
                 
                 if (this.UnwantedCall != null)
-                    hash = hash * 57 + this.UnwantedCall.GetHashCode();
+                    hash = hash * 59 + this.UnwantedCall.GetHashCode();
                 
                 if (this.CallTime != null)
-                    hash = hash * 57 + this.CallTime.GetHashCode();
+                    hash = hash * 59 + this.CallTime.GetHashCode();
                 
                 if (this.Reporter != null)
-                    hash = hash * 57 + this.Reporter.GetHashCode();
+                    hash = hash * 59 + this.Reporter.GetHashCode();
                 
-                if (this.ReporterLoation != null)
-                    hash = hash * 57 + this.ReporterLoation.GetHashCode();
+                if (this.IpAddress != null)
+                    hash = hash * 59 + this.IpAddress.GetHashCode();
+                
+                if (this.Latitude != null)
+                    hash = hash * 59 + this.Latitude.GetHashCode();
+                
+                if (this.Longitude != null)
+                    hash = hash * 59 + this.Longitude.GetHashCode();
                 
                 return hash;
             }

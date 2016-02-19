@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
 
     s.summary          = "Call Control API"
     s.description      = <<-DESC
-                         API for blocking phone calls with Call Control. Data is from crowdsourced community blacklist from 12+ million users and government agencies (FTC, FCC, IRS)&lt;br/&gt;&lt;br/&gt;Try with api_key &#39;demo&#39;, hit explore above, and then try phone number 12012574082 (spam) 12061231234 (not spam)
+                         API for blocking phone calls with Call Control. Data is from crowdsourced community blacklist from 12+ million users and government agencies (FTC, FCC, IRS) Try with api_key &#39;demo&#39;, hit explore above, and then try phone numbers 18008472911,13157244022,17275567300,18008276655,12061231234.
                          DESC
 
     s.platform     = :ios, '7.0'

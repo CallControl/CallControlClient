@@ -45,7 +45,9 @@ class CallReport(object):
             'unwanted_call': 'bool',
             'call_time': 'datetime',
             'reporter': 'str',
-            'reporter_loation': 'ReporterLoation'
+            'ip_address': 'str',
+            'latitude': 'float',
+            'longitude': 'float'
         }
 
         self.attribute_map = {
@@ -57,7 +59,9 @@ class CallReport(object):
             'unwanted_call': 'UnwantedCall',
             'call_time': 'CallTime',
             'reporter': 'Reporter',
-            'reporter_loation': 'ReporterLoation'
+            'ip_address': 'IpAddress',
+            'latitude': 'Latitude',
+            'longitude': 'Longitude'
         }
 
         self._phone_number = None
@@ -68,7 +72,9 @@ class CallReport(object):
         self._unwanted_call = None
         self._call_time = None
         self._reporter = None
-        self._reporter_loation = None
+        self._ip_address = None
+        self._latitude = None
+        self._longitude = None
 
     @property
     def phone_number(self):
@@ -156,7 +162,7 @@ class CallReport(object):
         :param caller_type: The caller_type of this CallReport.
         :type: str
         """
-        allowed_values = ["Unknown", "Telemarketing", "Collection_Agency", "Political", "Surveyor", "Prank_Call", "Fund_Raiser", "Other_Commercial", "Scam", "Pay_Phone", "Business", "Reminder_Notification_Call", "Junk_Fax", "Fax_Machine", "Spam_Text", "RoboCall", "NotSpam", "Callback"]
+        allowed_values = ["Unknown", "Telemarketing", "Collection_Agency", "Political", "Surveyor", "Prank_Call", "Fund_Raiser", "Other_Commercial", "Scam", "VOIP", "Business", "Reminder_Notification_Call", "Junk_Fax", "Fax_Machine", "Spam_Text", "RoboCall", "NotSpam", "Callback"]
         if caller_type not in allowed_values:
             raise ValueError(
                 "Invalid value for `caller_type`, must be one of {0}"
@@ -253,26 +259,70 @@ class CallReport(object):
         self._reporter = reporter
 
     @property
-    def reporter_loation(self):
+    def ip_address(self):
         """
-        Gets the reporter_loation of this CallReport.
+        Gets the ip_address of this CallReport.
 
 
-        :return: The reporter_loation of this CallReport.
-        :rtype: ReporterLoation
+        :return: The ip_address of this CallReport.
+        :rtype: str
         """
-        return self._reporter_loation
+        return self._ip_address
 
-    @reporter_loation.setter
-    def reporter_loation(self, reporter_loation):
+    @ip_address.setter
+    def ip_address(self, ip_address):
         """
-        Sets the reporter_loation of this CallReport.
+        Sets the ip_address of this CallReport.
 
 
-        :param reporter_loation: The reporter_loation of this CallReport.
-        :type: ReporterLoation
+        :param ip_address: The ip_address of this CallReport.
+        :type: str
         """
-        self._reporter_loation = reporter_loation
+        self._ip_address = ip_address
+
+    @property
+    def latitude(self):
+        """
+        Gets the latitude of this CallReport.
+
+
+        :return: The latitude of this CallReport.
+        :rtype: float
+        """
+        return self._latitude
+
+    @latitude.setter
+    def latitude(self, latitude):
+        """
+        Sets the latitude of this CallReport.
+
+
+        :param latitude: The latitude of this CallReport.
+        :type: float
+        """
+        self._latitude = latitude
+
+    @property
+    def longitude(self):
+        """
+        Gets the longitude of this CallReport.
+
+
+        :return: The longitude of this CallReport.
+        :rtype: float
+        """
+        return self._longitude
+
+    @longitude.setter
+    def longitude(self, longitude):
+        """
+        Sets the longitude of this CallReport.
+
+
+        :param longitude: The longitude of this CallReport.
+        :type: float
+        """
+        self._longitude = longitude
 
     def to_dict(self):
         """

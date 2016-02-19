@@ -13,5 +13,7 @@ case class CallReport (
   UnwantedCall: Boolean,
   CallTime: DateTime,
   Reporter: String,
-  ReporterLoation: ReporterLoation)
+  IpAddress: String,
+  Latitude: Double,
+  Longitude: Double)
   

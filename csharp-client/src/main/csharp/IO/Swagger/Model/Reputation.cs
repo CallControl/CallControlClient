@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
@@ -14,7 +15,7 @@ namespace IO.Swagger.Model
     /// 
     /// </summary>
     [DataContract]
-    public class Reputation :  IEquatable<Reputation>
+    public partial class Reputation :  IEquatable<Reputation>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Reputation" /> class.
@@ -164,22 +165,22 @@ namespace IO.Swagger.Model
                 // Suitable nullity checks etc, of course :)
                 
                 if (this.CallType != null)
-                    hash = hash * 57 + this.CallType.GetHashCode();
+                    hash = hash * 59 + this.CallType.GetHashCode();
                 
                 if (this.Confidence != null)
-                    hash = hash * 57 + this.Confidence.GetHashCode();
+                    hash = hash * 59 + this.Confidence.GetHashCode();
                 
                 if (this.IsSpam != null)
-                    hash = hash * 57 + this.IsSpam.GetHashCode();
+                    hash = hash * 59 + this.IsSpam.GetHashCode();
                 
                 if (this.LastCompaintDate != null)
-                    hash = hash * 57 + this.LastCompaintDate.GetHashCode();
+                    hash = hash * 59 + this.LastCompaintDate.GetHashCode();
                 
                 if (this.ReportedCallerName != null)
-                    hash = hash * 57 + this.ReportedCallerName.GetHashCode();
+                    hash = hash * 59 + this.ReportedCallerName.GetHashCode();
                 
                 if (this.Tags != null)
-                    hash = hash * 57 + this.Tags.GetHashCode();
+                    hash = hash * 59 + this.Tags.GetHashCode();
                 
                 return hash;
             }

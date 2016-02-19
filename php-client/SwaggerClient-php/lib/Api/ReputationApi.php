@@ -94,7 +94,7 @@ class ReputationApi
     /**
      * reputationReport
      *
-     * <br />\r\n<b>Report:</b> report spam calls received to better tune our algorithms based upon spam calls you receive
+     * Report: report spam calls received to better tune our algorithms based upon spam calls you receive
      *
      * @param \Swagger\Client\Model\CallReport $call_report [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional), (required)
      * @return void
@@ -110,7 +110,7 @@ class ReputationApi
     /**
      * reputationReportWithHttpInfo
      *
-     * <br />\r\n<b>Report:</b> report spam calls received to better tune our algorithms based upon spam calls you receive
+     * Report: report spam calls received to better tune our algorithms based upon spam calls you receive
      *
      * @param \Swagger\Client\Model\CallReport $call_report [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional), (required)
      * @return Array of null, HTTP status code, HTTP response headers (array of strings)
@@ -177,7 +177,7 @@ class ReputationApi
     /**
      * reputationReputation
      *
-     * <br />\r\n<b>Reputation</b>\r\n<br />\r\n            Premium service which returns a reputation informaiton of a phone number via API.
+     * Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.
      *
      * @param string $phone_number phone number to search (required)
      * @return \Swagger\Client\Model\Reputation
@@ -193,7 +193,7 @@ class ReputationApi
     /**
      * reputationReputationWithHttpInfo
      *
-     * <br />\r\n<b>Reputation</b>\r\n<br />\r\n            Premium service which returns a reputation informaiton of a phone number via API.
+     * Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.
      *
      * @param string $phone_number phone number to search (required)
      * @return Array of \Swagger\Client\Model\Reputation, HTTP status code, HTTP response headers (array of strings)
@@ -255,12 +255,12 @@ class ReputationApi
                 return array(null, $statusCode, $httpHeader);
             }
 
-            return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\Reputation', $httpHeader), $statusCode, $httpHeader);
+            return array(\Swagger\Client\ObjectSerializer::deserialize($response, '\Swagger\Client\Model\Reputation', $httpHeader), $statusCode, $httpHeader);
             
         } catch (ApiException $e) {
             switch ($e->getCode()) { 
             case 200:
-                $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\Reputation', $e->getResponseHeaders());
+                $data = \Swagger\Client\ObjectSerializer::deserialize($e->getResponseBody(), '\Swagger\Client\Model\Reputation', $e->getResponseHeaders());
                 $e->setResponseObject($data);
                 break;
             }

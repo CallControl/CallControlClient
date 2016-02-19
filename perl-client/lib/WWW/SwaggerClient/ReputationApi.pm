@@ -54,7 +54,7 @@ sub new {
 #
 # reputation_report
 #
-# <br />\r\n<b>Report:</b> report spam calls received to better tune our algorithms based upon spam calls you receive
+# Report: report spam calls received to better tune our algorithms based upon spam calls you receive
 # 
 # @param CallReport $call_report [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional), (required)
 {
@@ -66,7 +66,7 @@ sub new {
     },
     };
     __PACKAGE__->method_documentation->{ reputation_report } = { 
-    	summary => '&lt;br /&gt;\r\n&lt;b&gt;Report:&lt;/b&gt; report spam calls received to better tune our algorithms based upon spam calls you receive',
+    	summary => 'Report: report spam calls received to better tune our algorithms based upon spam calls you receive',
         params => $params,
         returns => undef,
         };
@@ -124,7 +124,7 @@ sub reputation_report {
 #
 # reputation_reputation
 #
-# <br />\r\n<b>Reputation</b>\r\n<br />\r\n            Premium service which returns a reputation informaiton of a phone number via API.
+# Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.
 # 
 # @param string $phone_number phone number to search (required)
 {
@@ -136,7 +136,7 @@ sub reputation_report {
     },
     };
     __PACKAGE__->method_documentation->{ reputation_reputation } = { 
-    	summary => '&lt;br /&gt;\r\n&lt;b&gt;Reputation&lt;/b&gt;\r\n&lt;br /&gt;\r\n            Premium service which returns a reputation informaiton of a phone number via API.',
+    	summary => 'Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.',
         params => $params,
         returns => 'Reputation',
         };

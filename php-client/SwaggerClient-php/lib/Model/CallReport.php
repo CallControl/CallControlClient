@@ -59,7 +59,9 @@ class CallReport implements ArrayAccess
         'unwanted_call' => 'bool',
         'call_time' => '\DateTime',
         'reporter' => 'string',
-        'reporter_loation' => '\Swagger\Client\Model\ReporterLoation'
+        'ip_address' => 'string',
+        'latitude' => 'double',
+        'longitude' => 'double'
     );
   
     /** 
@@ -75,7 +77,9 @@ class CallReport implements ArrayAccess
         'unwanted_call' => 'UnwantedCall',
         'call_time' => 'CallTime',
         'reporter' => 'Reporter',
-        'reporter_loation' => 'ReporterLoation'
+        'ip_address' => 'IpAddress',
+        'latitude' => 'Latitude',
+        'longitude' => 'Longitude'
     );
   
     /**
@@ -91,7 +95,9 @@ class CallReport implements ArrayAccess
         'unwanted_call' => 'setUnwantedCall',
         'call_time' => 'setCallTime',
         'reporter' => 'setReporter',
-        'reporter_loation' => 'setReporterLoation'
+        'ip_address' => 'setIpAddress',
+        'latitude' => 'setLatitude',
+        'longitude' => 'setLongitude'
     );
   
     /**
@@ -107,7 +113,9 @@ class CallReport implements ArrayAccess
         'unwanted_call' => 'getUnwantedCall',
         'call_time' => 'getCallTime',
         'reporter' => 'getReporter',
-        'reporter_loation' => 'getReporterLoation'
+        'ip_address' => 'getIpAddress',
+        'latitude' => 'getLatitude',
+        'longitude' => 'getLongitude'
     );
   
     
@@ -160,10 +168,22 @@ class CallReport implements ArrayAccess
     protected $reporter;
     
     /**
-      * $reporter_loation 
-      * @var \Swagger\Client\Model\ReporterLoation
+      * $ip_address 
+      * @var string
       */
-    protected $reporter_loation;
+    protected $ip_address;
+    
+    /**
+      * $latitude 
+      * @var double
+      */
+    protected $latitude;
+    
+    /**
+      * $longitude 
+      * @var double
+      */
+    protected $longitude;
     
 
     /**
@@ -181,7 +201,9 @@ class CallReport implements ArrayAccess
             $this->unwanted_call = $data["unwanted_call"];
             $this->call_time = $data["call_time"];
             $this->reporter = $data["reporter"];
-            $this->reporter_loation = $data["reporter_loation"];
+            $this->ip_address = $data["ip_address"];
+            $this->latitude = $data["latitude"];
+            $this->longitude = $data["longitude"];
         }
     }
     
@@ -264,9 +286,9 @@ class CallReport implements ArrayAccess
      */
     public function setCallerType($caller_type)
     {
-        $allowed_values = array("Unknown", "Telemarketing", "Collection_Agency", "Political", "Surveyor", "Prank_Call", "Fund_Raiser", "Other_Commercial", "Scam", "Pay_Phone", "Business", "Reminder_Notification_Call", "Junk_Fax", "Fax_Machine", "Spam_Text", "RoboCall", "NotSpam", "Callback");
+        $allowed_values = array("Unknown", "Telemarketing", "Collection_Agency", "Political", "Surveyor", "Prank_Call", "Fund_Raiser", "Other_Commercial", "Scam", "VOIP", "Business", "Reminder_Notification_Call", "Junk_Fax", "Fax_Machine", "Spam_Text", "RoboCall", "NotSpam", "Callback");
         if (!in_array($caller_type, $allowed_values)) {
-            throw new \InvalidArgumentException("Invalid value for 'caller_type', must be one of 'Unknown', 'Telemarketing', 'Collection_Agency', 'Political', 'Surveyor', 'Prank_Call', 'Fund_Raiser', 'Other_Commercial', 'Scam', 'Pay_Phone', 'Business', 'Reminder_Notification_Call', 'Junk_Fax', 'Fax_Machine', 'Spam_Text', 'RoboCall', 'NotSpam', 'Callback'");
+            throw new \InvalidArgumentException("Invalid value for 'caller_type', must be one of 'Unknown', 'Telemarketing', 'Collection_Agency', 'Political', 'Surveyor', 'Prank_Call', 'Fund_Raiser', 'Other_Commercial', 'Scam', 'VOIP', 'Business', 'Reminder_Notification_Call', 'Junk_Fax', 'Fax_Machine', 'Spam_Text', 'RoboCall', 'NotSpam', 'Callback'");
         }
         $this->caller_type = $caller_type;
         return $this;
@@ -357,23 +379,65 @@ class CallReport implements ArrayAccess
     }
     
     /**
-     * Gets reporter_loation
-     * @return \Swagger\Client\Model\ReporterLoation
+     * Gets ip_address
+     * @return string
      */
-    public function getReporterLoation()
+    public function getIpAddress()
     {
-        return $this->reporter_loation;
+        return $this->ip_address;
     }
   
     /**
-     * Sets reporter_loation
-     * @param \Swagger\Client\Model\ReporterLoation $reporter_loation 
+     * Sets ip_address
+     * @param string $ip_address 
      * @return $this
      */
-    public function setReporterLoation($reporter_loation)
+    public function setIpAddress($ip_address)
     {
         
-        $this->reporter_loation = $reporter_loation;
+        $this->ip_address = $ip_address;
+        return $this;
+    }
+    
+    /**
+     * Gets latitude
+     * @return double
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+  
+    /**
+     * Sets latitude
+     * @param double $latitude 
+     * @return $this
+     */
+    public function setLatitude($latitude)
+    {
+        
+        $this->latitude = $latitude;
+        return $this;
+    }
+    
+    /**
+     * Gets longitude
+     * @return double
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+  
+    /**
+     * Sets longitude
+     * @param double $longitude 
+     * @return $this
+     */
+    public function setLongitude($longitude)
+    {
+        
+        $this->longitude = $longitude;
         return $this;
     }
     
@@ -425,9 +489,9 @@ class CallReport implements ArrayAccess
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) {
-            return json_encode(get_object_vars($this), JSON_PRETTY_PRINT);
+            return json_encode(\Swagger\Client\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         } else {
-            return json_encode(get_object_vars($this));
+            return json_encode(\Swagger\Client\ObjectSerializer::sanitizeForSerialization($this));
         }
     }
 }

@@ -159,9 +159,23 @@ __PACKAGE__->method_documentation({
     	format => '',
     	read_only => '',
     		},
-    'reporter_loation' => {
-    	datatype => 'ReporterLoation',
-    	base_name => 'ReporterLoation',
+    'ip_address' => {
+    	datatype => 'string',
+    	base_name => 'IpAddress',
+    	description => '',
+    	format => '',
+    	read_only => '',
+    		},
+    'latitude' => {
+    	datatype => 'double',
+    	base_name => 'Latitude',
+    	description => '',
+    	format => '',
+    	read_only => '',
+    		},
+    'longitude' => {
+    	datatype => 'double',
+    	base_name => 'Longitude',
     	description => '',
     	format => '',
     	read_only => '',
@@ -178,7 +192,9 @@ __PACKAGE__->swagger_types( {
     'unwanted_call' => 'boolean',
     'call_time' => 'DateTime',
     'reporter' => 'string',
-    'reporter_loation' => 'ReporterLoation'
+    'ip_address' => 'string',
+    'latitude' => 'double',
+    'longitude' => 'double'
 } );
 
 __PACKAGE__->attribute_map( {
@@ -190,7 +206,9 @@ __PACKAGE__->attribute_map( {
     'unwanted_call' => 'UnwantedCall',
     'call_time' => 'CallTime',
     'reporter' => 'Reporter',
-    'reporter_loation' => 'ReporterLoation'
+    'ip_address' => 'IpAddress',
+    'latitude' => 'Latitude',
+    'longitude' => 'Longitude'
 } );
 
 __PACKAGE__->mk_accessors(keys %{__PACKAGE__->attribute_map});

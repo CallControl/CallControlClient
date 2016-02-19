@@ -19,7 +19,7 @@
  */
 + (JSONKeyMapper *)keyMapper
 {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"PhoneNumber": @"phoneNumber", @"ReportedCallerName": @"reportedCallerName", @"ReportedCallerId": @"reportedCallerId", @"CallerType": @"callerType", @"Comment": @"comment", @"UnwantedCall": @"unwantedCall", @"CallTime": @"callTime", @"Reporter": @"reporter", @"ReporterLoation": @"reporterLoation" }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"PhoneNumber": @"phoneNumber", @"ReportedCallerName": @"reportedCallerName", @"ReportedCallerId": @"reportedCallerId", @"CallerType": @"callerType", @"Comment": @"comment", @"UnwantedCall": @"unwantedCall", @"CallTime": @"callTime", @"Reporter": @"reporter", @"IpAddress": @"ipAddress", @"Latitude": @"latitude", @"Longitude": @"longitude" }];
 }
 
 /**
@@ -29,7 +29,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName
 {
-  NSArray *optionalProperties = @[@"phoneNumber", @"reportedCallerName", @"reportedCallerId", @"callerType", @"comment", @"unwantedCall", @"callTime", @"reporter", @"reporterLoation"];
+  NSArray *optionalProperties = @[@"phoneNumber", @"reportedCallerName", @"reportedCallerId", @"callerType", @"comment", @"unwantedCall", @"callTime", @"reporter", @"ipAddress", @"latitude", @"longitude"];
 
   if ([optionalProperties containsObject:propertyName]) {
     return YES;

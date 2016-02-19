@@ -7,7 +7,6 @@
  * Do not edit the class manually.
  */
 
-#import "SWGReporterLoation.h"
 
 
 @protocol SWGCallReport
@@ -32,6 +31,10 @@
 
 @property(nonatomic) NSString* reporter;
 
-@property(nonatomic) SWGReporterLoation* reporterLoation;
+@property(nonatomic) NSString* ipAddress;
+
+@property(nonatomic) NSNumber* latitude;
+
+@property(nonatomic) NSNumber* longitude;
 
 @end

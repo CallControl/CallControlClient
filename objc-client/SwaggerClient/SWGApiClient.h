@@ -12,10 +12,9 @@
  * Do not edit the class manually.
  */
 
-#import "SWGDoNotCallComplaints.h"
+#import "SWGComplaints.h"
 #import "SWGReputation.h"
 #import "SWGCallReport.h"
-#import "SWGReporterLoation.h"
 
 
 @class SWGConfiguration;
