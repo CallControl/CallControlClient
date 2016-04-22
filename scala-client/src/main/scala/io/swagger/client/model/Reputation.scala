@@ -5,10 +5,10 @@ import org.joda.time.DateTime
 
 
 case class Reputation (
-  CallType: String,
-  Confidence: Integer,
-  IsSpam: Boolean,
-  LastCompaintDate: DateTime,
-  ReportedCallerName: String,
-  Tags: List[String])
+  callType: String,
+  confidence: Integer,
+  isSpam: Boolean,
+  lastCompaintDate: DateTime,
+  reportedCallerName: String,
+  tags: List[String])
   

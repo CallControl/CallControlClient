@@ -84,16 +84,14 @@ class ReputationApi(object):
             raise ValueError("Missing the required parameter `call_report` when calling `reputation_report`")
 
         resource_path = '/api/2015-11-01/Report'.replace('{format}', 'json')
-        method = 'POST'
-
         path_params = {}
 
         query_params = {}
 
         header_params = {}
 
-        form_params = {}
-        files = {}
+        form_params = []
+        local_var_files = {}
 
         body_params = None
         if 'call_report' in params:
@@ -112,13 +110,13 @@ class ReputationApi(object):
         # Authentication setting
         auth_settings = []
 
-        response = self.api_client.call_api(resource_path, method,
+        response = self.api_client.call_api(resource_path, 'POST',
                                             path_params,
                                             query_params,
                                             header_params,
                                             body=body_params,
                                             post_params=form_params,
-                                            files=files,
+                                            files=local_var_files,
                                             response_type=None,
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
@@ -163,8 +161,6 @@ class ReputationApi(object):
             raise ValueError("Missing the required parameter `phone_number` when calling `reputation_reputation`")
 
         resource_path = '/api/2015-11-01/Reputation/{phoneNumber}'.replace('{format}', 'json')
-        method = 'GET'
-
         path_params = {}
         if 'phone_number' in params:
             path_params['phoneNumber'] = params['phone_number']
@@ -173,8 +169,8 @@ class ReputationApi(object):
 
         header_params = {}
 
-        form_params = {}
-        files = {}
+        form_params = []
+        local_var_files = {}
 
         body_params = None
 
@@ -191,13 +187,13 @@ class ReputationApi(object):
         # Authentication setting
         auth_settings = []
 
-        response = self.api_client.call_api(resource_path, method,
+        response = self.api_client.call_api(resource_path, 'GET',
                                             path_params,
                                             query_params,
                                             header_params,
                                             body=body_params,
                                             post_params=form_params,
-                                            files=files,
+                                            files=local_var_files,
                                             response_type='Reputation',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))

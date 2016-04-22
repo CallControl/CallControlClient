@@ -15,6 +15,7 @@ namespace IO.Swagger.Api
     /// </summary>
     public interface IReputationApi
     {
+        #region Synchronous Operations
         
         /// <summary>
         /// Report: report spam calls received to better tune our algorithms based upon spam calls you receive
@@ -22,6 +23,7 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callReport">[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),</param>
         /// <returns></returns>
         void ReputationReport (CallReport callReport);
@@ -32,29 +34,10 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callReport">[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ReputationReportWithHttpInfo (CallReport callReport);
-
-        /// <summary>
-        /// Report: report spam calls received to better tune our algorithms based upon spam calls you receive
-        /// </summary>
-        /// <remarks>
-        /// This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
-        /// </remarks>
-        /// <param name="callReport">[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ReputationReportAsync (CallReport callReport);
-
-        /// <summary>
-        /// Report: report spam calls received to better tune our algorithms based upon spam calls you receive
-        /// </summary>
-        /// <remarks>
-        /// This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
-        /// </remarks>
-        /// <param name="callReport">[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ReputationReportAsyncWithHttpInfo (CallReport callReport);
         
         /// <summary>
         /// Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.
@@ -62,6 +45,7 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="phoneNumber">phone number to search</param>
         /// <returns>Reputation</returns>
         Reputation ReputationReputation (string phoneNumber);
@@ -72,16 +56,44 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="phoneNumber">phone number to search</param>
         /// <returns>ApiResponse of Reputation</returns>
         ApiResponse<Reputation> ReputationReputationWithHttpInfo (string phoneNumber);
+        
+        #endregion Synchronous Operations
+        
+        #region Asynchronous Operations
+        
+        /// <summary>
+        /// Report: report spam calls received to better tune our algorithms based upon spam calls you receive
+        /// </summary>
+        /// <remarks>
+        /// This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
+        /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="callReport">[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task ReputationReportAsync (CallReport callReport);
 
+        /// <summary>
+        /// Report: report spam calls received to better tune our algorithms based upon spam calls you receive
+        /// </summary>
+        /// <remarks>
+        /// This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
+        /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="callReport">[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> ReputationReportAsyncWithHttpInfo (CallReport callReport);
+        
         /// <summary>
         /// Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.
         /// </summary>
         /// <remarks>
         /// This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="phoneNumber">phone number to search</param>
         /// <returns>Task of Reputation</returns>
         System.Threading.Tasks.Task<Reputation> ReputationReputationAsync (string phoneNumber);
@@ -92,9 +104,12 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="phoneNumber">phone number to search</param>
         /// <returns>Task of ApiResponse (Reputation)</returns>
         System.Threading.Tasks.Task<ApiResponse<Reputation>> ReputationReputationAsyncWithHttpInfo (string phoneNumber);
+        
+        #endregion Asynchronous Operations
         
     }
   
@@ -110,6 +125,12 @@ namespace IO.Swagger.Api
         public ReputationApi(String basePath)
         {
             this.Configuration = new Configuration(new ApiClient(basePath));
+
+            // ensure API client has configuration ready
+            if (Configuration.ApiClient.Configuration == null)
+            {
+                this.Configuration.ApiClient.Configuration = this.Configuration;
+            }
         }
     
         /// <summary>
@@ -124,6 +145,12 @@ namespace IO.Swagger.Api
                 this.Configuration = Configuration.Default; 
             else
                 this.Configuration = configuration;
+
+            // ensure API client has configuration ready
+            if (Configuration.ApiClient.Configuration == null)
+            {
+                this.Configuration.ApiClient.Configuration = this.Configuration;
+            }
         }
 
         /// <summary>
@@ -177,6 +204,7 @@ namespace IO.Swagger.Api
         /// <summary>
         /// Report: report spam calls received to better tune our algorithms based upon spam calls you receive This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callReport">[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),</param> 
         /// <returns></returns>
         public void ReputationReport (CallReport callReport)
@@ -187,6 +215,7 @@ namespace IO.Swagger.Api
         /// <summary>
         /// Report: report spam calls received to better tune our algorithms based upon spam calls you receive This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callReport">[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),</param> 
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> ReputationReportWithHttpInfo (CallReport callReport)
@@ -197,68 +226,70 @@ namespace IO.Swagger.Api
                 throw new ApiException(400, "Missing required parameter 'callReport' when calling ReputationApi->ReputationReport");
             
     
-            var path_ = "/api/2015-11-01/Report";
+            var localVarPath = "/api/2015-11-01/Report";
     
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            Object postBody = null;
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] httpContentTypes = new String[] {
+            String[] localVarHttpContentTypes = new String[] {
                 "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"
             };
-            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-            String[] httpHeaderAccepts = new String[] {
+            String[] localVarHttpHeaderAccepts = new String[] {
                 "application/json", "text/json", "application/xml", "text/xml"
             };
-            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
-            if (httpHeaderAccept != null)
-                headerParams.Add("Accept", httpHeaderAccept);
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
+            localVarPathParams.Add("format", "json");
             
             
             
             
             if (callReport.GetType() != typeof(byte[]))
             {
-                postBody = Configuration.ApiClient.Serialize(callReport); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(callReport); // http body (model) parameter
             }
             else
             {
-                postBody = callReport; // byte array
+                localVarPostBody = callReport; // byte array
             }
 
             
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, 
-                Method.POST, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, httpContentType);
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath, 
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
 
-            int statusCode = (int) response.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
     
-            if (statusCode >= 400)
-                throw new ApiException (statusCode, "Error calling ReputationReport: " + response.Content, response.Content);
-            else if (statusCode == 0)
-                throw new ApiException (statusCode, "Error calling ReputationReport: " + response.ErrorMessage, response.ErrorMessage);
+            if (localVarStatusCode >= 400)
+                throw new ApiException (localVarStatusCode, "Error calling ReputationReport: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException (localVarStatusCode, "Error calling ReputationReport: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
     
             
-            return new ApiResponse<Object>(statusCode,
-                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
-    
+
+        
         /// <summary>
         /// Report: report spam calls received to better tune our algorithms based upon spam calls you receive This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callReport">[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task ReputationReportAsync (CallReport callReport)
@@ -270,6 +301,7 @@ namespace IO.Swagger.Api
         /// <summary>
         /// Report: report spam calls received to better tune our algorithms based upon spam calls you receive This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callReport">[FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> ReputationReportAsyncWithHttpInfo (CallReport callReport)
@@ -278,73 +310,81 @@ namespace IO.Swagger.Api
             if (callReport == null) throw new ApiException(400, "Missing required parameter 'callReport' when calling ReputationReport");
             
     
-            var path_ = "/api/2015-11-01/Report";
+            var localVarPath = "/api/2015-11-01/Report";
     
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            Object postBody = null;
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] httpContentTypes = new String[] {
+            String[] localVarHttpContentTypes = new String[] {
                 "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"
             };
-            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-            String[] httpHeaderAccepts = new String[] {
+            String[] localVarHttpHeaderAccepts = new String[] {
                 "application/json", "text/json", "application/xml", "text/xml"
             };
-            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
-            if (httpHeaderAccept != null)
-                headerParams.Add("Accept", httpHeaderAccept);
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
+            localVarPathParams.Add("format", "json");
             
             
             
             
-            postBody = Configuration.ApiClient.Serialize(callReport); // http body (model) parameter
-            
+            if (callReport.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(callReport); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = callReport; // byte array
+            }
 
             
 
             // make the HTTP request
-            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, 
-                Method.POST, queryParams, postBody, headerParams, formParams, fileParams, 
-                pathParams, httpContentType);
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath, 
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, 
+                localVarPathParams, localVarHttpContentType);
 
-            int statusCode = (int) response.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
  
-            if (statusCode >= 400)
-                throw new ApiException (statusCode, "Error calling ReputationReport: " + response.Content, response.Content);
-            else if (statusCode == 0)
-                throw new ApiException (statusCode, "Error calling ReputationReport: " + response.ErrorMessage, response.ErrorMessage);
+            if (localVarStatusCode >= 400)
+                throw new ApiException (localVarStatusCode, "Error calling ReputationReport: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException (localVarStatusCode, "Error calling ReputationReport: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
             
-            return new ApiResponse<Object>(statusCode,
-                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
         
         /// <summary>
         /// Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API. This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="phoneNumber">phone number to search</param> 
         /// <returns>Reputation</returns>
         public Reputation ReputationReputation (string phoneNumber)
         {
-             ApiResponse<Reputation> response = ReputationReputationWithHttpInfo(phoneNumber);
-             return response.Data;
+             ApiResponse<Reputation> localVarResponse = ReputationReputationWithHttpInfo(phoneNumber);
+             return localVarResponse.Data;
         }
 
         /// <summary>
         /// Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API. This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="phoneNumber">phone number to search</param> 
         /// <returns>ApiResponse of Reputation</returns>
         public ApiResponse< Reputation > ReputationReputationWithHttpInfo (string phoneNumber)
@@ -355,33 +395,33 @@ namespace IO.Swagger.Api
                 throw new ApiException(400, "Missing required parameter 'phoneNumber' when calling ReputationApi->ReputationReputation");
             
     
-            var path_ = "/api/2015-11-01/Reputation/{phoneNumber}";
+            var localVarPath = "/api/2015-11-01/Reputation/{phoneNumber}";
     
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            Object postBody = null;
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] httpContentTypes = new String[] {
+            String[] localVarHttpContentTypes = new String[] {
                 
             };
-            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-            String[] httpHeaderAccepts = new String[] {
+            String[] localVarHttpHeaderAccepts = new String[] {
                 "application/json", "text/json", "application/xml", "text/xml"
             };
-            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
-            if (httpHeaderAccept != null)
-                headerParams.Add("Accept", httpHeaderAccept);
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            if (phoneNumber != null) pathParams.Add("phoneNumber", Configuration.ApiClient.ParameterToString(phoneNumber)); // path parameter
+            localVarPathParams.Add("format", "json");
+            if (phoneNumber != null) localVarPathParams.Add("phoneNumber", Configuration.ApiClient.ParameterToString(phoneNumber)); // path parameter
             
             
             
@@ -391,38 +431,41 @@ namespace IO.Swagger.Api
             
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, 
-                Method.GET, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, httpContentType);
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath, 
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
 
-            int statusCode = (int) response.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
     
-            if (statusCode >= 400)
-                throw new ApiException (statusCode, "Error calling ReputationReputation: " + response.Content, response.Content);
-            else if (statusCode == 0)
-                throw new ApiException (statusCode, "Error calling ReputationReputation: " + response.ErrorMessage, response.ErrorMessage);
+            if (localVarStatusCode >= 400)
+                throw new ApiException (localVarStatusCode, "Error calling ReputationReputation: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException (localVarStatusCode, "Error calling ReputationReputation: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
     
-            return new ApiResponse<Reputation>(statusCode,
-                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Reputation) Configuration.ApiClient.Deserialize(response, typeof(Reputation)));
+            return new ApiResponse<Reputation>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Reputation) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Reputation)));
             
         }
-    
+
+        
         /// <summary>
         /// Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API. This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="phoneNumber">phone number to search</param>
         /// <returns>Task of Reputation</returns>
         public async System.Threading.Tasks.Task<Reputation> ReputationReputationAsync (string phoneNumber)
         {
-             ApiResponse<Reputation> response = await ReputationReputationAsyncWithHttpInfo(phoneNumber);
-             return response.Data;
+             ApiResponse<Reputation> localVarResponse = await ReputationReputationAsyncWithHttpInfo(phoneNumber);
+             return localVarResponse.Data;
 
         }
 
         /// <summary>
         /// Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API. This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
         /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="phoneNumber">phone number to search</param>
         /// <returns>Task of ApiResponse (Reputation)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Reputation>> ReputationReputationAsyncWithHttpInfo (string phoneNumber)
@@ -431,33 +474,33 @@ namespace IO.Swagger.Api
             if (phoneNumber == null) throw new ApiException(400, "Missing required parameter 'phoneNumber' when calling ReputationReputation");
             
     
-            var path_ = "/api/2015-11-01/Reputation/{phoneNumber}";
+            var localVarPath = "/api/2015-11-01/Reputation/{phoneNumber}";
     
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            Object postBody = null;
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] httpContentTypes = new String[] {
+            String[] localVarHttpContentTypes = new String[] {
                 
             };
-            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-            String[] httpHeaderAccepts = new String[] {
+            String[] localVarHttpHeaderAccepts = new String[] {
                 "application/json", "text/json", "application/xml", "text/xml"
             };
-            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
-            if (httpHeaderAccept != null)
-                headerParams.Add("Accept", httpHeaderAccept);
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            if (phoneNumber != null) pathParams.Add("phoneNumber", Configuration.ApiClient.ParameterToString(phoneNumber)); // path parameter
+            localVarPathParams.Add("format", "json");
+            if (phoneNumber != null) localVarPathParams.Add("phoneNumber", Configuration.ApiClient.ParameterToString(phoneNumber)); // path parameter
             
             
             
@@ -467,20 +510,20 @@ namespace IO.Swagger.Api
             
 
             // make the HTTP request
-            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, 
-                Method.GET, queryParams, postBody, headerParams, formParams, fileParams, 
-                pathParams, httpContentType);
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath, 
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, 
+                localVarPathParams, localVarHttpContentType);
 
-            int statusCode = (int) response.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
  
-            if (statusCode >= 400)
-                throw new ApiException (statusCode, "Error calling ReputationReputation: " + response.Content, response.Content);
-            else if (statusCode == 0)
-                throw new ApiException (statusCode, "Error calling ReputationReputation: " + response.ErrorMessage, response.ErrorMessage);
+            if (localVarStatusCode >= 400)
+                throw new ApiException (localVarStatusCode, "Error calling ReputationReputation: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException (localVarStatusCode, "Error calling ReputationReputation: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<Reputation>(statusCode,
-                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Reputation) Configuration.ApiClient.Deserialize(response, typeof(Reputation)));
+            return new ApiResponse<Reputation>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Reputation) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Reputation)));
             
         }
         

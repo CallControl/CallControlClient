@@ -21,7 +21,7 @@ module SwaggerClient
     end
 
     # Report: report spam calls received to better tune our algorithms based upon spam calls you receive
-    # This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
+    # This returns information required to perform basic call blocking behaviors<br />\r\n            Try with api_key 'demo' and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
     # @param call_report [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -44,7 +44,7 @@ module SwaggerClient
       fail "Missing the required parameter 'call_report' when calling reputation_report" if call_report.nil?
       
       # resource path
-      path = "/api/2015-11-01/Report".sub('{format}','json')
+      local_var_path = "/api/2015-11-01/Report".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -67,7 +67,7 @@ module SwaggerClient
       post_body = @api_client.object_to_http_body(call_report)
       
       auth_names = []
-      data, status_code, headers = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -80,7 +80,7 @@ module SwaggerClient
     end
 
     # Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.
-    # This returns information required to perform basic call blocking behaviors&lt;br /&gt;\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
+    # This returns information required to perform basic call blocking behaviors<br />\r\n            Try with api_key 'demo' and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
     # @param phone_number phone number to search
     # @param [Hash] opts the optional parameters
     # @return [Reputation]
@@ -103,7 +103,7 @@ module SwaggerClient
       fail "Missing the required parameter 'phone_number' when calling reputation_reputation" if phone_number.nil?
       
       # resource path
-      path = "/api/2015-11-01/Reputation/{phoneNumber}".sub('{format}','json').sub('{' + 'phoneNumber' + '}', phone_number.to_s)
+      local_var_path = "/api/2015-11-01/Reputation/{phoneNumber}".sub('{format}','json').sub('{' + 'phoneNumber' + '}', phone_number.to_s)
 
       # query parameters
       query_params = {}
@@ -126,7 +126,7 @@ module SwaggerClient
       post_body = nil
       
       auth_names = []
-      data, status_code, headers = @api_client.call_api(:GET, path,
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,

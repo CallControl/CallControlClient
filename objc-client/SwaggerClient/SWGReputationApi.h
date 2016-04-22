@@ -29,10 +29,8 @@
 /// 
 ///
 /// @return 
--(NSNumber*) reputationReportWithCompletionBlock :(SWGCallReport*) callReport 
-    
-    
-    completionHandler: (void (^)(NSError* error))completionBlock;
+-(NSNumber*) reputationReportWithCallReport: (SWGCallReport*) callReport
+    completionHandler: (void (^)(NSError* error)) handler;
 
 
 ///
@@ -44,10 +42,8 @@
 /// 
 ///
 /// @return SWGReputation*
--(NSNumber*) reputationReputationWithCompletionBlock :(NSString*) phoneNumber 
-    
-    completionHandler: (void (^)(SWGReputation* output, NSError* error))completionBlock;
-    
+-(NSNumber*) reputationReputationWithPhoneNumber: (NSString*) phoneNumber
+    completionHandler: (void (^)(SWGReputation* output, NSError* error)) handler;
 
 
 

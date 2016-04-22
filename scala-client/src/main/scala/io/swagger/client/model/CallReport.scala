@@ -5,15 +5,15 @@ import org.joda.time.DateTime
 
 
 case class CallReport (
-  PhoneNumber: String,
-  ReportedCallerName: String,
-  ReportedCallerId: String,
-  CallerType: String,
-  Comment: String,
-  UnwantedCall: Boolean,
-  CallTime: DateTime,
-  Reporter: String,
-  IpAddress: String,
-  Latitude: Double,
-  Longitude: Double)
+  phoneNumber: String,
+  reportedCallerName: String,
+  reportedCallerId: String,
+  callerType: String,
+  comment: String,
+  unwantedCall: Boolean,
+  callTime: DateTime,
+  reporter: String,
+  ipAddress: String,
+  latitude: Double,
+  longitude: Double)
   

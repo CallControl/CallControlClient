@@ -41,7 +41,7 @@ import io.swagger.client.auth.HttpBasicAuth;
 import io.swagger.client.auth.ApiKeyAuth;
 import io.swagger.client.auth.OAuth;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-02-19T18:07:15.346Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-04-22T07:24:15.167Z")
 public class ApiClient {
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
   private String basePath = "https://www.callcontrol.com";
@@ -49,7 +49,7 @@ public class ApiClient {
   private int connectionTimeout = 0;
 
   private Client httpClient;
-  private ObjectMapper mapper;
+  private ObjectMapper objectMapper;
 
   private Map<String, Authentication> authentications;
 
@@ -59,33 +59,81 @@ public class ApiClient {
   private DateFormat dateFormat;
 
   public ApiClient() {
-    mapper = new ObjectMapper();
-    mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    mapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-    mapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
-    mapper.registerModule(new JodaModule());
+    objectMapper = new ObjectMapper();
+    objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    objectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+    objectMapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
+    objectMapper.registerModule(new JodaModule());
+    objectMapper.setDateFormat(ApiClient.buildDefaultDateFormat());
 
-    httpClient = buildHttpClient(debugging);
-
-    // Use RFC3339 format for date and datetime.
-    // See http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14
-    this.dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-
-    // Use UTC as the default time zone.
-    this.dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-    this.mapper.setDateFormat((DateFormat) dateFormat.clone());
+    dateFormat = ApiClient.buildDefaultDateFormat();
 
     // Set default User-Agent.
-    setUserAgent("Java-Swagger");
+    setUserAgent("Swagger-Codegen/1.0.0/java");
 
     // Setup authentications (key: authentication name, value: authentication).
     authentications = new HashMap<String, Authentication>();
     authentications.put("apiKey", new ApiKeyAuth("header", "apiKey"));
     // Prevent the authentications from being modified.
     authentications = Collections.unmodifiableMap(authentications);
+
+    rebuildHttpClient();
+  }
+
+  public static DateFormat buildDefaultDateFormat() {
+    // Use RFC3339 format for date and datetime.
+    // See http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+    // Use UTC as the default time zone.
+    dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+    return dateFormat;
+  }
+
+  /**
+   * Build the Client used to make HTTP requests with the latest settings,
+   * i.e. objectMapper and debugging.
+   * TODO: better to use the Builder Pattern?
+   */
+  public ApiClient rebuildHttpClient() {
+    // Add the JSON serialization support to Jersey
+    JacksonJsonProvider jsonProvider = new JacksonJsonProvider(objectMapper);
+    DefaultClientConfig conf = new DefaultClientConfig();
+    conf.getSingletons().add(jsonProvider);
+    Client client = Client.create(conf);
+    if (debugging) {
+      client.addFilter(new LoggingFilter());
+    }
+    this.httpClient = client;
+    return this;
+  }
+
+  /**
+   * Returns the current object mapper used for JSON serialization/deserialization.
+   * <p>
+   * Note: If you make changes to the object mapper, remember to set it back via
+   * <code>setObjectMapper</code> in order to trigger HTTP client rebuilding.
+   * </p>
+   */
+  public ObjectMapper getObjectMapper() {
+    return objectMapper;
+  }
+
+  public ApiClient setObjectMapper(ObjectMapper objectMapper) {
+    this.objectMapper = objectMapper;
+    // Need to rebuild the Client as it depends on object mapper.
+    rebuildHttpClient();
+    return this;
+  }
+
+  public Client getHttpClient() {
+    return httpClient;
+  }
+
+  public ApiClient setHttpClient(Client httpClient) {
+    this.httpClient = httpClient;
+    return this;
   }
 
   public String getBasePath() {
@@ -226,8 +274,8 @@ public class ApiClient {
    */
   public ApiClient setDebugging(boolean debugging) {
     this.debugging = debugging;
-    // Rebuild HTTP Client according to the new "debugging" value.
-    this.httpClient = buildHttpClient(debugging);
+    // Need to rebuild the Client as it depends on the value of debugging.
+    rebuildHttpClient();
     return this;
   }
 
@@ -261,8 +309,10 @@ public class ApiClient {
    */
   public ApiClient setDateFormat(DateFormat dateFormat) {
     this.dateFormat = dateFormat;
-    // also set the date format for model (de)serialization with Date properties
-    this.mapper.setDateFormat((DateFormat) dateFormat.clone());
+    // Also set the date format for model (de)serialization with Date properties.
+    this.objectMapper.setDateFormat((DateFormat) dateFormat.clone());
+    // Need to rebuild the Client as objectMapper changes.
+    rebuildHttpClient();
     return this;
   }
 
@@ -515,7 +565,10 @@ public class ApiClient {
       response = builder.type(contentType).put(ClientResponse.class, serialize(body, contentType, formParams));
     } else if ("DELETE".equals(method)) {
       response = builder.type(contentType).delete(ClientResponse.class, serialize(body, contentType, formParams));
-    } else {
+    } else if ("PATCH".equals(method)) {
+      response = builder.type(contentType).header("X-HTTP-Method-Override", "PATCH").post(ClientResponse.class, serialize(body, contentType, formParams));
+    }
+    else {
       throw new ApiException(500, "unknown method type " + method);
     }
     return response;
@@ -605,20 +658,5 @@ public class ApiClient {
     }
 
     return encodedFormParams;
-  }
-
-  /**
-   * Build the Client used to make HTTP requests.
-   */
-  private Client buildHttpClient(boolean debugging) {
-    // Add the JSON serialization support to Jersey
-    JacksonJsonProvider jsonProvider = new JacksonJsonProvider(mapper);
-    DefaultClientConfig conf = new DefaultClientConfig();
-    conf.getSingletons().add(jsonProvider);
-    Client client = Client.create(conf);
-    if (debugging) {
-      client.addFilter(new LoggingFilter());
-    }
-    return client;
   }
 }

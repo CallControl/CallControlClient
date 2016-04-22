@@ -14,7 +14,7 @@ import java.util.Date;
  **/
 
 @ApiModel(description = "Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-02-19T18:07:15.346Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-04-22T07:24:15.167Z")
 public class CallReport   {
   
   private String phoneNumber = null;
@@ -67,8 +67,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("PhoneNumber")
   public String getPhoneNumber() {
     return phoneNumber;
@@ -80,8 +84,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport reportedCallerName(String reportedCallerName) {
+    this.reportedCallerName = reportedCallerName;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("ReportedCallerName")
   public String getReportedCallerName() {
     return reportedCallerName;
@@ -93,8 +101,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport reportedCallerId(String reportedCallerId) {
+    this.reportedCallerId = reportedCallerId;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("ReportedCallerId")
   public String getReportedCallerId() {
     return reportedCallerId;
@@ -106,8 +118,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport callerType(CallerTypeEnum callerType) {
+    this.callerType = callerType;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("CallerType")
   public CallerTypeEnum getCallerType() {
     return callerType;
@@ -119,8 +135,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport comment(String comment) {
+    this.comment = comment;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("Comment")
   public String getComment() {
     return comment;
@@ -132,8 +152,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport unwantedCall(Boolean unwantedCall) {
+    this.unwantedCall = unwantedCall;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("UnwantedCall")
   public Boolean getUnwantedCall() {
     return unwantedCall;
@@ -145,8 +169,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport callTime(Date callTime) {
+    this.callTime = callTime;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("CallTime")
   public Date getCallTime() {
     return callTime;
@@ -158,8 +186,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport reporter(String reporter) {
+    this.reporter = reporter;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("Reporter")
   public String getReporter() {
     return reporter;
@@ -171,8 +203,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport ipAddress(String ipAddress) {
+    this.ipAddress = ipAddress;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("IpAddress")
   public String getIpAddress() {
     return ipAddress;
@@ -184,8 +220,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport latitude(Double latitude) {
+    this.latitude = latitude;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("Latitude")
   public Double getLatitude() {
     return latitude;
@@ -197,8 +237,12 @@ public class CallReport   {
   
   /**
    **/
+  public CallReport longitude(Double longitude) {
+    this.longitude = longitude;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("Longitude")
   public Double getLongitude() {
     return longitude;
@@ -218,19 +262,17 @@ public class CallReport   {
       return false;
     }
     CallReport callReport = (CallReport) o;
-
-    return true && Objects.equals(phoneNumber, callReport.phoneNumber) &&
-        Objects.equals(reportedCallerName, callReport.reportedCallerName) &&
-        Objects.equals(reportedCallerId, callReport.reportedCallerId) &&
-        Objects.equals(callerType, callReport.callerType) &&
-        Objects.equals(comment, callReport.comment) &&
-        Objects.equals(unwantedCall, callReport.unwantedCall) &&
-        Objects.equals(callTime, callReport.callTime) &&
-        Objects.equals(reporter, callReport.reporter) &&
-        Objects.equals(ipAddress, callReport.ipAddress) &&
-        Objects.equals(latitude, callReport.latitude) &&
-        Objects.equals(longitude, callReport.longitude)
-    ;
+    return Objects.equals(this.phoneNumber, callReport.phoneNumber) &&
+        Objects.equals(this.reportedCallerName, callReport.reportedCallerName) &&
+        Objects.equals(this.reportedCallerId, callReport.reportedCallerId) &&
+        Objects.equals(this.callerType, callReport.callerType) &&
+        Objects.equals(this.comment, callReport.comment) &&
+        Objects.equals(this.unwantedCall, callReport.unwantedCall) &&
+        Objects.equals(this.callTime, callReport.callTime) &&
+        Objects.equals(this.reporter, callReport.reporter) &&
+        Objects.equals(this.ipAddress, callReport.ipAddress) &&
+        Objects.equals(this.latitude, callReport.latitude) &&
+        Objects.equals(this.longitude, callReport.longitude);
   }
 
   @Override

@@ -73,14 +73,12 @@ static SWGReputationApi* singletonAPI = nil;
 ///
 /// Report: report spam calls received to better tune our algorithms based upon spam calls you receive
 /// This returns information required to perform basic call blocking behaviors<br />\r\n            Try with api_key 'demo' and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
-///  @param callReport [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
+///  @param callReport [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional), 
 ///
 ///  @returns void
 ///
--(NSNumber*) reputationReportWithCompletionBlock: (SWGCallReport*) callReport
-        
-        
-        completionHandler: (void (^)(NSError* error))completionBlock { 
+-(NSNumber*) reputationReportWithCallReport: (SWGCallReport*) callReport
+    completionHandler: (void (^)(NSError* error)) handler {
 
     
     // verify the required parameter 'callReport' is set
@@ -128,42 +126,39 @@ static SWGReputationApi* singletonAPI = nil;
 
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
     
     bodyParam = callReport;
     
 
     
-    return [self.apiClient requestWithCompletionBlock: resourcePath
-                                               method: @"POST"
-                                           pathParams: pathParams
-                                          queryParams: queryParams
-                                           formParams: formParams
-                                                files: files
-                                                 body: bodyParam
-                                         headerParams: headerParams
-                                         authSettings: authSettings
-                                   requestContentType: requestContentType
-                                  responseContentType: responseContentType
-                                         responseType: nil
-                                      completionBlock: ^(id data, NSError *error) {
-                  completionBlock(error);
-                  
-              }
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: nil
+                           completionBlock: ^(id data, NSError *error) {
+                               handler(error);
+                           }
           ];
 }
 
 ///
 /// Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.
 /// This returns information required to perform basic call blocking behaviors<br />\r\n            Try with api_key 'demo' and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
-///  @param phoneNumber phone number to search
+///  @param phoneNumber phone number to search 
 ///
 ///  @returns SWGReputation*
 ///
--(NSNumber*) reputationReputationWithCompletionBlock: (NSString*) phoneNumber
-        
-        completionHandler: (void (^)(SWGReputation* output, NSError* error))completionBlock { 
-        
+-(NSNumber*) reputationReputationWithPhoneNumber: (NSString*) phoneNumber
+    completionHandler: (void (^)(SWGReputation* output, NSError* error)) handler {
 
     
     // verify the required parameter 'phoneNumber' is set
@@ -214,28 +209,27 @@ static SWGReputationApi* singletonAPI = nil;
 
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
     
     
     
 
     
-    return [self.apiClient requestWithCompletionBlock: resourcePath
-                                               method: @"GET"
-                                           pathParams: pathParams
-                                          queryParams: queryParams
-                                           formParams: formParams
-                                                files: files
-                                                 body: bodyParam
-                                         headerParams: headerParams
-                                         authSettings: authSettings
-                                   requestContentType: requestContentType
-                                  responseContentType: responseContentType
-                                         responseType: @"SWGReputation*"
-                                      completionBlock: ^(id data, NSError *error) {
-                  
-                  completionBlock((SWGReputation*)data, error);
-              }
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"SWGReputation*"
+                           completionBlock: ^(id data, NSError *error) {
+                               handler((SWGReputation*)data, error);
+                           }
           ];
 }
 

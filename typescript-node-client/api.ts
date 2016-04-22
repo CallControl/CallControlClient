@@ -8,29 +8,33 @@ import http = require('http');
 
 /* tslint:disable:no-unused-variable */
 
-/**
-* Free service (with registration) which serves Government Do Not Call data via API \r\n            Search via phone number returns available data, reported name, total complaints
-*/
-export class Complaints {
-    /**
-    * Reported Caller Name
-    */
-    "reportedCallerName": string;
-    "totalNumberOfComplaints": number;
-    "complaintsByEntity": { [key: string]: number; };
-    "lastCompaintDate": Date;
-    "tags": Array<string>;
+export class CallControlUser {
+    "phoneNumber": string;
+    "phoneNumbeRegion": string;
+    "whiteList": Array<string>;
+    "blackList": Array<string>;
+    "quietHourList": Array<QuietHour>;
+    "useCommunityBlacklist": boolean;
+    "breakThroughQhWithMultipleCalls": boolean;
+    "whiteListBreaksQh": boolean;
+    "blockBehavior": CallControlUser.BlockBehaviorEnum;
+    "email": string;
+    "age": number;
+    "gender": string;
+    "salutation": string;
+    "firstName": string;
+    "middleName": string;
+    "lastName": string;
+    "suffix": string;
 }
 
-export class Reputation {
-    "callType": string;
-    "confidence": number;
-    "isSpam": boolean;
-    "lastCompaintDate": Date;
-    "reportedCallerName": string;
-    "tags": Array<string>;
+export namespace CallControlUser {
+    export enum BlockBehaviorEnum { 
+        allow = <any> 'allow',
+        voiceMail = <any> 'voiceMail',
+        block = <any> 'block'
+    }
 }
-
 /**
 * Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
 */
@@ -70,6 +74,40 @@ export namespace CallReport {
         Callback = <any> 'Callback'
     }
 }
+/**
+* Free service (with registration) which serves Government Do Not Call data via API \r\n            Search via phone number returns available data, reported name, total complaints
+*/
+export class Complaints {
+    /**
+    * Reported Caller Name
+    */
+    "reportedCallerName": string;
+    "totalNumberOfComplaints": number;
+    "complaintsByEntity": { [key: string]: number; };
+    "lastCompaintDate": Date;
+    "tags": Array<string>;
+}
+
+export class Object {
+}
+
+export class QuietHour {
+    "dayOfWeekList": Array<string>;
+    "startHourLocal": number;
+    "startMinLocal": number;
+    "durationMin": number;
+    "timeZoneName": string;
+}
+
+export class Reputation {
+    "callType": string;
+    "confidence": number;
+    "isSpam": boolean;
+    "lastCompaintDate": Date;
+    "reportedCallerName": string;
+    "tags": Array<string>;
+}
+
 
 interface Authentication {
     /**
@@ -160,7 +198,7 @@ export class ComplaintsApi {
      * @param phoneNumber phone number to search
      */
     public complaintsComplaints (phoneNumber: string) : Promise<{ response: http.ClientResponse; body: Complaints;  }> {
-        const path = this.basePath + '/api/2015-11-01/Complaints/{phoneNumber}'
+        const localVarPath = this.basePath + '/api/2015-11-01/Complaints/{phoneNumber}'
             .replace('{' + 'phoneNumber' + '}', String(phoneNumber));
         let queryParameters: any = {};
         let headerParams: any = this.extendObj({}, this.defaultHeaders);
@@ -174,13 +212,13 @@ export class ComplaintsApi {
 
         let useFormData = false;
 
-        let deferred = promise.defer<{ response: http.ClientResponse; body: Complaints;  }>();
+        let localVarDeferred = promise.defer<{ response: http.ClientResponse; body: Complaints;  }>();
 
         let requestOptions: request.Options = {
             method: 'GET',
             qs: queryParameters,
             headers: headerParams,
-            uri: path,
+            uri: localVarPath,
             json: true,
         }
 
@@ -196,17 +234,274 @@ export class ComplaintsApi {
 
         request(requestOptions, (error, response, body) => {
             if (error) {
-                deferred.reject(error);
+                localVarDeferred.reject(error);
             } else {
                 if (response.statusCode >= 200 && response.statusCode <= 299) {
-                    deferred.resolve({ response: response, body: body });
+                    localVarDeferred.resolve({ response: response, body: body });
                 } else {
-                    deferred.reject({ response: response, body: body });
+                    localVarDeferred.reject({ response: response, body: body });
                 }
             }
         });
 
-        return deferred.promise;
+        return localVarDeferred.promise;
+    }
+}
+export class EnterpriseApiApi {
+    protected basePath = 'https://www.callcontrol.com';
+    protected defaultHeaders : any = {};
+
+
+
+    public authentications = {
+        'default': <Authentication>new VoidAuth(),
+        'apiKey': new ApiKeyAuth('header', 'apiKey'),
+    }
+
+    constructor(basePath?: string);
+    constructor(basePathOrUsername: string, password?: string, basePath?: string) {
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        } else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername
+            }
+        }
+    }
+
+    set apiKey(key: string) {
+        this.authentications.apiKey.apiKey = key;
+    }
+    private extendObj<T1,T2>(objA: T1, objB: T2) {
+        for(let key in objB){
+            if(objB.hasOwnProperty(key)){
+                objA[key] = objB[key];
+            }
+        }
+        return <T1&T2>objA;
+    }
+    /**
+     * Enterprise  GET: GetBlockList\r\n            Simple Enteprise which returns the current and complete list of numbers that the network is blocking
+     * All \r\n            Try with api_key &#39;demo&#39; for the demo block list (which will block 18008472911, 13157244022, 17275567300, 18008276655) but not 12061231234
+     * @param cached 
+     */
+    public enterpriseApiGetBlockList (cached?: boolean) : Promise<{ response: http.ClientResponse; body: Array<string>;  }> {
+        const localVarPath = this.basePath + '/api/2015-11-01/Enterprise/GetBlockList';
+        let queryParameters: any = {};
+        let headerParams: any = this.extendObj({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        if (cached !== undefined) {
+            queryParameters['cached'] = cached;
+        }
+
+        let useFormData = false;
+
+        let localVarDeferred = promise.defer<{ response: http.ClientResponse; body: Array<string>;  }>();
+
+        let requestOptions: request.Options = {
+            method: 'GET',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: localVarPath,
+            json: true,
+        }
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+
+        request(requestOptions, (error, response, body) => {
+            if (error) {
+                localVarDeferred.reject(error);
+            } else {
+                if (response.statusCode >= 200 && response.statusCode <= 299) {
+                    localVarDeferred.resolve({ response: response, body: body });
+                } else {
+                    localVarDeferred.reject({ response: response, body: body });
+                }
+            }
+        });
+
+        return localVarDeferred.promise;
+    }
+    /**
+     * Enterprise  GET: GetUser\r\n            Returns the current information from the user
+     * 
+     * @param phoneNumber 
+     */
+    public enterpriseApiGetUser (phoneNumber: string) : Promise<{ response: http.ClientResponse; body: CallControlUser;  }> {
+        const localVarPath = this.basePath + '/api/2015-11-01/Enterprise/GetUser/{phoneNumber}'
+            .replace('{' + 'phoneNumber' + '}', String(phoneNumber));
+        let queryParameters: any = {};
+        let headerParams: any = this.extendObj({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'phoneNumber' is set
+        if (!phoneNumber) {
+            throw new Error('Missing required parameter phoneNumber when calling enterpriseApiGetUser');
+        }
+
+        let useFormData = false;
+
+        let localVarDeferred = promise.defer<{ response: http.ClientResponse; body: CallControlUser;  }>();
+
+        let requestOptions: request.Options = {
+            method: 'GET',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: localVarPath,
+            json: true,
+        }
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+
+        request(requestOptions, (error, response, body) => {
+            if (error) {
+                localVarDeferred.reject(error);
+            } else {
+                if (response.statusCode >= 200 && response.statusCode <= 299) {
+                    localVarDeferred.resolve({ response: response, body: body });
+                } else {
+                    localVarDeferred.reject({ response: response, body: body });
+                }
+            }
+        });
+
+        return localVarDeferred.promise;
+    }
+    /**
+     * Enterprise  GET: ShouldBlock\r\n            Simple Enteprise which returns a call block proceed decision.
+     * This returns information required to perform basic call blocking behaviors\r\n            Try with api_key &#39;demo&#39; and phone numbers 18008472911, 13157244022, 17275567300, 18008276655, and 12061231234 (last one not spam)
+     * @param phoneNumber phone number to search
+     * @param userPhoneNumber (OPTOPNAL) phone number of user to look up block rules
+     */
+    public enterpriseApiShouldBlock (phoneNumber: string, userPhoneNumber: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+        const localVarPath = this.basePath + '/api/2015-11-01/Enterprise/ShouldBlock/{phoneNumber}/{userPhoneNumber}'
+            .replace('{' + 'phoneNumber' + '}', String(phoneNumber))
+            .replace('{' + 'userPhoneNumber' + '}', String(userPhoneNumber));
+        let queryParameters: any = {};
+        let headerParams: any = this.extendObj({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'phoneNumber' is set
+        if (!phoneNumber) {
+            throw new Error('Missing required parameter phoneNumber when calling enterpriseApiShouldBlock');
+        }
+
+        // verify required parameter 'userPhoneNumber' is set
+        if (!userPhoneNumber) {
+            throw new Error('Missing required parameter userPhoneNumber when calling enterpriseApiShouldBlock');
+        }
+
+        let useFormData = false;
+
+        let localVarDeferred = promise.defer<{ response: http.ClientResponse; body: string;  }>();
+
+        let requestOptions: request.Options = {
+            method: 'GET',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: localVarPath,
+            json: true,
+        }
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+
+        request(requestOptions, (error, response, body) => {
+            if (error) {
+                localVarDeferred.reject(error);
+            } else {
+                if (response.statusCode >= 200 && response.statusCode <= 299) {
+                    localVarDeferred.resolve({ response: response, body: body });
+                } else {
+                    localVarDeferred.reject({ response: response, body: body });
+                }
+            }
+        });
+
+        return localVarDeferred.promise;
+    }
+    /**
+     * 
+     * 
+     * @param user 
+     */
+    public enterpriseApiUpsertUser (user: CallControlUser) : Promise<{ response: http.ClientResponse; body: Object;  }> {
+        const localVarPath = this.basePath + '/api/2015-11-01/Enterprise/UpsertUser';
+        let queryParameters: any = {};
+        let headerParams: any = this.extendObj({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'user' is set
+        if (!user) {
+            throw new Error('Missing required parameter user when calling enterpriseApiUpsertUser');
+        }
+
+        let useFormData = false;
+
+        let localVarDeferred = promise.defer<{ response: http.ClientResponse; body: Object;  }>();
+
+        let requestOptions: request.Options = {
+            method: 'POST',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: localVarPath,
+            json: true,
+            body: user,
+        }
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+
+        request(requestOptions, (error, response, body) => {
+            if (error) {
+                localVarDeferred.reject(error);
+            } else {
+                if (response.statusCode >= 200 && response.statusCode <= 299) {
+                    localVarDeferred.resolve({ response: response, body: body });
+                } else {
+                    localVarDeferred.reject({ response: response, body: body });
+                }
+            }
+        });
+
+        return localVarDeferred.promise;
     }
 }
 export class ReputationApi {
@@ -250,7 +545,7 @@ export class ReputationApi {
      * @param callReport [FromBody] Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
      */
     public reputationReport (callReport: CallReport) : Promise<{ response: http.ClientResponse; body?: any;  }> {
-        const path = this.basePath + '/api/2015-11-01/Report';
+        const localVarPath = this.basePath + '/api/2015-11-01/Report';
         let queryParameters: any = {};
         let headerParams: any = this.extendObj({}, this.defaultHeaders);
         let formParams: any = {};
@@ -263,13 +558,13 @@ export class ReputationApi {
 
         let useFormData = false;
 
-        let deferred = promise.defer<{ response: http.ClientResponse; body?: any;  }>();
+        let localVarDeferred = promise.defer<{ response: http.ClientResponse; body?: any;  }>();
 
         let requestOptions: request.Options = {
             method: 'POST',
             qs: queryParameters,
             headers: headerParams,
-            uri: path,
+            uri: localVarPath,
             json: true,
             body: callReport,
         }
@@ -286,17 +581,17 @@ export class ReputationApi {
 
         request(requestOptions, (error, response, body) => {
             if (error) {
-                deferred.reject(error);
+                localVarDeferred.reject(error);
             } else {
                 if (response.statusCode >= 200 && response.statusCode <= 299) {
-                    deferred.resolve({ response: response, body: body });
+                    localVarDeferred.resolve({ response: response, body: body });
                 } else {
-                    deferred.reject({ response: response, body: body });
+                    localVarDeferred.reject({ response: response, body: body });
                 }
             }
         });
 
-        return deferred.promise;
+        return localVarDeferred.promise;
     }
     /**
      * Reputation:\r\n            Premium service which returns a reputation informaiton of a phone number via API.
@@ -304,7 +599,7 @@ export class ReputationApi {
      * @param phoneNumber phone number to search
      */
     public reputationReputation (phoneNumber: string) : Promise<{ response: http.ClientResponse; body: Reputation;  }> {
-        const path = this.basePath + '/api/2015-11-01/Reputation/{phoneNumber}'
+        const localVarPath = this.basePath + '/api/2015-11-01/Reputation/{phoneNumber}'
             .replace('{' + 'phoneNumber' + '}', String(phoneNumber));
         let queryParameters: any = {};
         let headerParams: any = this.extendObj({}, this.defaultHeaders);
@@ -318,13 +613,13 @@ export class ReputationApi {
 
         let useFormData = false;
 
-        let deferred = promise.defer<{ response: http.ClientResponse; body: Reputation;  }>();
+        let localVarDeferred = promise.defer<{ response: http.ClientResponse; body: Reputation;  }>();
 
         let requestOptions: request.Options = {
             method: 'GET',
             qs: queryParameters,
             headers: headerParams,
-            uri: path,
+            uri: localVarPath,
             json: true,
         }
 
@@ -340,16 +635,16 @@ export class ReputationApi {
 
         request(requestOptions, (error, response, body) => {
             if (error) {
-                deferred.reject(error);
+                localVarDeferred.reject(error);
             } else {
                 if (response.statusCode >= 200 && response.statusCode <= 299) {
-                    deferred.resolve({ response: response, body: body });
+                    localVarDeferred.resolve({ response: response, body: body });
                 } else {
-                    deferred.reject({ response: response, body: body });
+                    localVarDeferred.reject({ response: response, body: body });
                 }
             }
         });
 
-        return deferred.promise;
+        return localVarDeferred.promise;
     }
 }

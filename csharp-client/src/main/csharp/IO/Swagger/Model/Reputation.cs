@@ -7,68 +7,74 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace IO.Swagger.Model
 {
-
     /// <summary>
     /// 
     /// </summary>
     [DataContract]
     public partial class Reputation :  IEquatable<Reputation>
-    {
+    { 
+    
         /// <summary>
         /// Initializes a new instance of the <see cref="Reputation" /> class.
+        /// Initializes a new instance of the <see cref="Reputation" />class.
         /// </summary>
-        public Reputation()
+        /// <param name="Confidence">Confidence.</param>
+        /// <param name="IsSpam">IsSpam.</param>
+        /// <param name="LastCompaintDate">LastCompaintDate.</param>
+        /// <param name="ReportedCallerName">ReportedCallerName.</param>
+        /// <param name="Tags">Tags.</param>
+
+        public Reputation(int? Confidence = null, bool? IsSpam = null, DateTime? LastCompaintDate = null, string ReportedCallerName = null, List<string> Tags = null)
         {
+            this.Confidence = Confidence;
+            this.IsSpam = IsSpam;
+            this.LastCompaintDate = LastCompaintDate;
+            this.ReportedCallerName = ReportedCallerName;
+            this.Tags = Tags;
             
         }
-
         
+    
         /// <summary>
         /// Gets or Sets CallType
         /// </summary>
         [DataMember(Name="CallType", EmitDefaultValue=false)]
-        public string CallType { get; set; }
-  
-        
+        public string CallType { get; private set; }
+    
         /// <summary>
         /// Gets or Sets Confidence
         /// </summary>
         [DataMember(Name="Confidence", EmitDefaultValue=false)]
         public int? Confidence { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets IsSpam
         /// </summary>
         [DataMember(Name="IsSpam", EmitDefaultValue=false)]
         public bool? IsSpam { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets LastCompaintDate
         /// </summary>
         [DataMember(Name="LastCompaintDate", EmitDefaultValue=false)]
         public DateTime? LastCompaintDate { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets ReportedCallerName
         /// </summary>
         [DataMember(Name="ReportedCallerName", EmitDefaultValue=false)]
         public string ReportedCallerName { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets Tags
         /// </summary>
         [DataMember(Name="Tags", EmitDefaultValue=false)]
         public List<string> Tags { get; set; }
-  
-        
-  
+    
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

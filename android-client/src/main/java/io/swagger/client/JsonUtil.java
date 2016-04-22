@@ -35,16 +35,28 @@ public class JsonUtil {
   public static Type getListTypeForDeserialization(Class cls) {
     String className = cls.getSimpleName();
     
-    if ("Complaints".equalsIgnoreCase(className)) {
-      return new TypeToken<List<Complaints>>(){}.getType();
-    }
-    
-    if ("Reputation".equalsIgnoreCase(className)) {
-      return new TypeToken<List<Reputation>>(){}.getType();
+    if ("CallControlUser".equalsIgnoreCase(className)) {
+      return new TypeToken<List<CallControlUser>>(){}.getType();
     }
     
     if ("CallReport".equalsIgnoreCase(className)) {
       return new TypeToken<List<CallReport>>(){}.getType();
+    }
+    
+    if ("Complaints".equalsIgnoreCase(className)) {
+      return new TypeToken<List<Complaints>>(){}.getType();
+    }
+    
+    if ("Object".equalsIgnoreCase(className)) {
+      return new TypeToken<List<Object>>(){}.getType();
+    }
+    
+    if ("QuietHour".equalsIgnoreCase(className)) {
+      return new TypeToken<List<QuietHour>>(){}.getType();
+    }
+    
+    if ("Reputation".equalsIgnoreCase(className)) {
+      return new TypeToken<List<Reputation>>(){}.getType();
     }
     
     return new TypeToken<List<Object>>(){}.getType();
@@ -53,16 +65,28 @@ public class JsonUtil {
   public static Type getTypeForDeserialization(Class cls) {
     String className = cls.getSimpleName();
     
-    if ("Complaints".equalsIgnoreCase(className)) {
-      return new TypeToken<Complaints>(){}.getType();
-    }
-    
-    if ("Reputation".equalsIgnoreCase(className)) {
-      return new TypeToken<Reputation>(){}.getType();
+    if ("CallControlUser".equalsIgnoreCase(className)) {
+      return new TypeToken<CallControlUser>(){}.getType();
     }
     
     if ("CallReport".equalsIgnoreCase(className)) {
       return new TypeToken<CallReport>(){}.getType();
+    }
+    
+    if ("Complaints".equalsIgnoreCase(className)) {
+      return new TypeToken<Complaints>(){}.getType();
+    }
+    
+    if ("Object".equalsIgnoreCase(className)) {
+      return new TypeToken<Object>(){}.getType();
+    }
+    
+    if ("QuietHour".equalsIgnoreCase(className)) {
+      return new TypeToken<QuietHour>(){}.getType();
+    }
+    
+    if ("Reputation".equalsIgnoreCase(className)) {
+      return new TypeToken<Reputation>(){}.getType();
     }
     
     return new TypeToken<Object>(){}.getType();

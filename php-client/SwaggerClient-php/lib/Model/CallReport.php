@@ -64,6 +64,10 @@ class CallReport implements ArrayAccess
         'longitude' => 'double'
     );
   
+    static function swaggerTypes() {
+        return self::$swaggerTypes;
+    }
+
     /** 
       * Array of attributes where the key is the local name, and the value is the original name
       * @var string[] 
@@ -82,6 +86,10 @@ class CallReport implements ArrayAccess
         'longitude' => 'Longitude'
     );
   
+    static function attributeMap() {
+        return self::$attributeMap;
+    }
+
     /**
       * Array of attributes to setter functions (for deserialization of responses)
       * @var string[]
@@ -100,6 +108,10 @@ class CallReport implements ArrayAccess
         'longitude' => 'setLongitude'
     );
   
+    static function setters() {
+        return self::$setters;
+    }
+
     /**
       * Array of attributes to getter functions (for serialization of requests)
       * @var string[]
@@ -118,6 +130,10 @@ class CallReport implements ArrayAccess
         'longitude' => 'getLongitude'
     );
   
+    static function getters() {
+        return self::$getters;
+    }
+
     
     /**
       * $phone_number 
@@ -192,6 +208,7 @@ class CallReport implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        
         if ($data != null) {
             $this->phone_number = $data["phone_number"];
             $this->reported_caller_name = $data["reported_caller_name"];

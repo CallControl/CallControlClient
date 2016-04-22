@@ -7,103 +7,178 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace IO.Swagger.Model
 {
-
     /// <summary>
     /// Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
     /// </summary>
     [DataContract]
     public partial class CallReport :  IEquatable<CallReport>
-    {
+    { 
+    
         /// <summary>
-        /// Initializes a new instance of the <see cref="CallReport" /> class.
+        /// Gets or Sets CallerType
         /// </summary>
-        public CallReport()
-        {
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CallerTypeEnum {
             
+            [EnumMember(Value = "Unknown")]
+            Unknown,
+            
+            [EnumMember(Value = "Telemarketing")]
+            Telemarketing,
+            
+            [EnumMember(Value = "Collection_Agency")]
+            CollectionAgency,
+            
+            [EnumMember(Value = "Political")]
+            Political,
+            
+            [EnumMember(Value = "Surveyor")]
+            Surveyor,
+            
+            [EnumMember(Value = "Prank_Call")]
+            PrankCall,
+            
+            [EnumMember(Value = "Fund_Raiser")]
+            FundRaiser,
+            
+            [EnumMember(Value = "Other_Commercial")]
+            OtherCommercial,
+            
+            [EnumMember(Value = "Scam")]
+            Scam,
+            
+            [EnumMember(Value = "VOIP")]
+            Voip,
+            
+            [EnumMember(Value = "Business")]
+            Business,
+            
+            [EnumMember(Value = "Reminder_Notification_Call")]
+            ReminderNotificationCall,
+            
+            [EnumMember(Value = "Junk_Fax")]
+            JunkFax,
+            
+            [EnumMember(Value = "Fax_Machine")]
+            FaxMachine,
+            
+            [EnumMember(Value = "Spam_Text")]
+            SpamText,
+            
+            [EnumMember(Value = "RoboCall")]
+            Robocall,
+            
+            [EnumMember(Value = "NotSpam")]
+            Notspam,
+            
+            [EnumMember(Value = "Callback")]
+            Callback
         }
 
+    
+        /// <summary>
+        /// Gets or Sets CallerType
+        /// </summary>
+        [DataMember(Name="CallerType", EmitDefaultValue=false)]
+        public CallerTypeEnum? CallerType { get; set; }
+    
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CallReport" /> class.
+        /// Initializes a new instance of the <see cref="CallReport" />class.
+        /// </summary>
+        /// <param name="PhoneNumber">PhoneNumber.</param>
+        /// <param name="ReportedCallerName">ReportedCallerName.</param>
+        /// <param name="ReportedCallerId">ReportedCallerId.</param>
+        /// <param name="CallerType">CallerType.</param>
+        /// <param name="Comment">Comment.</param>
+        /// <param name="UnwantedCall">UnwantedCall.</param>
+        /// <param name="CallTime">CallTime.</param>
+        /// <param name="Reporter">Reporter.</param>
+        /// <param name="IpAddress">IpAddress.</param>
+        /// <param name="Latitude">Latitude.</param>
+        /// <param name="Longitude">Longitude.</param>
+
+        public CallReport(string PhoneNumber = null, string ReportedCallerName = null, string ReportedCallerId = null, CallerTypeEnum? CallerType = null, string Comment = null, bool? UnwantedCall = null, DateTime? CallTime = null, string Reporter = null, string IpAddress = null, double? Latitude = null, double? Longitude = null)
+        {
+            this.PhoneNumber = PhoneNumber;
+            this.ReportedCallerName = ReportedCallerName;
+            this.ReportedCallerId = ReportedCallerId;
+            this.CallerType = CallerType;
+            this.Comment = Comment;
+            this.UnwantedCall = UnwantedCall;
+            this.CallTime = CallTime;
+            this.Reporter = Reporter;
+            this.IpAddress = IpAddress;
+            this.Latitude = Latitude;
+            this.Longitude = Longitude;
+            
+        }
         
+    
         /// <summary>
         /// Gets or Sets PhoneNumber
         /// </summary>
         [DataMember(Name="PhoneNumber", EmitDefaultValue=false)]
         public string PhoneNumber { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets ReportedCallerName
         /// </summary>
         [DataMember(Name="ReportedCallerName", EmitDefaultValue=false)]
         public string ReportedCallerName { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets ReportedCallerId
         /// </summary>
         [DataMember(Name="ReportedCallerId", EmitDefaultValue=false)]
         public string ReportedCallerId { get; set; }
-  
-        
-        /// <summary>
-        /// Gets or Sets CallerType
-        /// </summary>
-        [DataMember(Name="CallerType", EmitDefaultValue=false)]
-        public string CallerType { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets Comment
         /// </summary>
         [DataMember(Name="Comment", EmitDefaultValue=false)]
         public string Comment { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets UnwantedCall
         /// </summary>
         [DataMember(Name="UnwantedCall", EmitDefaultValue=false)]
         public bool? UnwantedCall { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets CallTime
         /// </summary>
         [DataMember(Name="CallTime", EmitDefaultValue=false)]
         public DateTime? CallTime { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets Reporter
         /// </summary>
         [DataMember(Name="Reporter", EmitDefaultValue=false)]
         public string Reporter { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets IpAddress
         /// </summary>
         [DataMember(Name="IpAddress", EmitDefaultValue=false)]
         public string IpAddress { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets Latitude
         /// </summary>
         [DataMember(Name="Latitude", EmitDefaultValue=false)]
         public double? Latitude { get; set; }
-  
-        
+    
         /// <summary>
         /// Gets or Sets Longitude
         /// </summary>
         [DataMember(Name="Longitude", EmitDefaultValue=false)]
         public double? Longitude { get; set; }
-  
-        
-  
+    
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

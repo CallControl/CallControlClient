@@ -17,12 +17,16 @@ require 'swagger_client/version'
 require 'swagger_client/configuration'
 
 # Models
-require 'swagger_client/models/complaints'
-require 'swagger_client/models/reputation'
+require 'swagger_client/models/call_control_user'
 require 'swagger_client/models/call_report'
+require 'swagger_client/models/complaints'
+require 'swagger_client/models/object'
+require 'swagger_client/models/quiet_hour'
+require 'swagger_client/models/reputation'
 
 # APIs
 require 'swagger_client/api/complaints_api'
+require 'swagger_client/api/enterprise_api_api'
 require 'swagger_client/api/reputation_api'
 
 module SwaggerClient

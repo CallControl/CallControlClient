@@ -59,6 +59,10 @@ class Reputation implements ArrayAccess
         'tags' => 'string[]'
     );
   
+    static function swaggerTypes() {
+        return self::$swaggerTypes;
+    }
+
     /** 
       * Array of attributes where the key is the local name, and the value is the original name
       * @var string[] 
@@ -72,6 +76,10 @@ class Reputation implements ArrayAccess
         'tags' => 'Tags'
     );
   
+    static function attributeMap() {
+        return self::$attributeMap;
+    }
+
     /**
       * Array of attributes to setter functions (for deserialization of responses)
       * @var string[]
@@ -85,6 +93,10 @@ class Reputation implements ArrayAccess
         'tags' => 'setTags'
     );
   
+    static function setters() {
+        return self::$setters;
+    }
+
     /**
       * Array of attributes to getter functions (for serialization of requests)
       * @var string[]
@@ -98,6 +110,10 @@ class Reputation implements ArrayAccess
         'tags' => 'getTags'
     );
   
+    static function getters() {
+        return self::$getters;
+    }
+
     
     /**
       * $call_type 
@@ -142,6 +158,7 @@ class Reputation implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        
         if ($data != null) {
             $this->call_type = $data["call_type"];
             $this->confidence = $data["confidence"];

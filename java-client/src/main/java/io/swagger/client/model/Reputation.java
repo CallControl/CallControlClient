@@ -2,17 +2,17 @@ package io.swagger.client.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 
 
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-02-19T18:07:15.346Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-04-22T07:24:15.167Z")
 public class Reputation   {
   
   private String callType = null;
@@ -23,23 +23,21 @@ public class Reputation   {
   private List<String> tags = new ArrayList<String>();
 
   
-  /**
-   **/
-  
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("CallType")
   public String getCallType() {
     return callType;
-  }
-  public void setCallType(String callType) {
-    this.callType = callType;
   }
 
   
   /**
    **/
+  public Reputation confidence(Integer confidence) {
+    this.confidence = confidence;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("Confidence")
   public Integer getConfidence() {
     return confidence;
@@ -51,8 +49,12 @@ public class Reputation   {
   
   /**
    **/
+  public Reputation isSpam(Boolean isSpam) {
+    this.isSpam = isSpam;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("IsSpam")
   public Boolean getIsSpam() {
     return isSpam;
@@ -64,8 +66,12 @@ public class Reputation   {
   
   /**
    **/
+  public Reputation lastCompaintDate(Date lastCompaintDate) {
+    this.lastCompaintDate = lastCompaintDate;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("LastCompaintDate")
   public Date getLastCompaintDate() {
     return lastCompaintDate;
@@ -77,8 +83,12 @@ public class Reputation   {
   
   /**
    **/
+  public Reputation reportedCallerName(String reportedCallerName) {
+    this.reportedCallerName = reportedCallerName;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("ReportedCallerName")
   public String getReportedCallerName() {
     return reportedCallerName;
@@ -90,8 +100,12 @@ public class Reputation   {
   
   /**
    **/
+  public Reputation tags(List<String> tags) {
+    this.tags = tags;
+    return this;
+  }
   
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "null", value = "")
   @JsonProperty("Tags")
   public List<String> getTags() {
     return tags;
@@ -111,14 +125,12 @@ public class Reputation   {
       return false;
     }
     Reputation reputation = (Reputation) o;
-
-    return true && Objects.equals(callType, reputation.callType) &&
-        Objects.equals(confidence, reputation.confidence) &&
-        Objects.equals(isSpam, reputation.isSpam) &&
-        Objects.equals(lastCompaintDate, reputation.lastCompaintDate) &&
-        Objects.equals(reportedCallerName, reputation.reportedCallerName) &&
-        Objects.equals(tags, reputation.tags)
-    ;
+    return Objects.equals(this.callType, reputation.callType) &&
+        Objects.equals(this.confidence, reputation.confidence) &&
+        Objects.equals(this.isSpam, reputation.isSpam) &&
+        Objects.equals(this.lastCompaintDate, reputation.lastCompaintDate) &&
+        Objects.equals(this.reportedCallerName, reputation.reportedCallerName) &&
+        Objects.equals(this.tags, reputation.tags);
   }
 
   @Override

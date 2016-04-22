@@ -1,384 +1,266 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define([undefined, '../ApiClient'], factory);
+    define(['../ApiClient'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(undefined, require('../ApiClient'));
+    module.exports = factory(require('../ApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.CallControlApi) {
       root.CallControlApi = {};
     }
-    factory(root.CallControlApi, root.CallControlApi.ApiClient);
+    root.CallControlApi.CallReport = factory(root.CallControlApi.ApiClient);
   }
-}(this, function(module, ApiClient) {
+}(this, function(ApiClient) {
   'use strict';
 
-  
-  
-//export module
-if ( typeof define === "function" && define.amd ) {
-	define('CallerTypeEnum', [], function() {
-        return CallerTypeEnum;
-	 });
-}
+  /**
+   * The CallReport model module.
+   * @module model/CallReport
+   * @version 2015-11-01
+   */
 
-var CallerTypeEnum = function CallerTypeEnum() {
-	var self = this;
+  /**
+   * Constructs a new <code>CallReport</code>.
+   * Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
+   * @alias module:model/CallReport
+   * @class
+   */
+  var exports = function() {
 
 
-	/**
-	 * @const
-	 */
-	self.UNKNOWN = "Unknown",
-	
-	/**
-	 * @const
-	 */
-	self.TELEMARKETING = "Telemarketing",
-	
-	/**
-	 * @const
-	 */
-	self.COLLECTION_AGENCY = "Collection_Agency",
-	
-	/**
-	 * @const
-	 */
-	self.POLITICAL = "Political",
-	
-	/**
-	 * @const
-	 */
-	self.SURVEYOR = "Surveyor",
-	
-	/**
-	 * @const
-	 */
-	self.PRANK_CALL = "Prank_Call",
-	
-	/**
-	 * @const
-	 */
-	self.FUND_RAISER = "Fund_Raiser",
-	
-	/**
-	 * @const
-	 */
-	self.OTHER_COMMERCIAL = "Other_Commercial",
-	
-	/**
-	 * @const
-	 */
-	self.SCAM = "Scam",
-	
-	/**
-	 * @const
-	 */
-	self.VOIP = "VOIP",
-	
-	/**
-	 * @const
-	 */
-	self.BUSINESS = "Business",
-	
-	/**
-	 * @const
-	 */
-	self.REMINDER_NOTIFICATION_CALL = "Reminder_Notification_Call",
-	
-	/**
-	 * @const
-	 */
-	self.JUNK_FAX = "Junk_Fax",
-	
-	/**
-	 * @const
-	 */
-	self.FAX_MACHINE = "Fax_Machine",
-	
-	/**
-	 * @const
-	 */
-	self.SPAM_TEXT = "Spam_Text",
-	
-	/**
-	 * @const
-	 */
-	self.ROBOCALL = "RoboCall",
-	
-	/**
-	 * @const
-	 */
-	self.NOTSPAM = "NotSpam",
-	
-	/**
-	 * @const
-	 */
-	self.CALLBACK = "Callback";
 
-}
+
+
+
+
+
+
+
+
+
+  };
+
+  /**
+   * Constructs a <code>CallReport</code> from a plain JavaScript object, optionally creating a new instance.
+   * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+   * @param {Object} data The plain JavaScript object bearing properties of interest.
+   * @param {module:model/CallReport} obj Optional instance to populate.
+   * @return {module:model/CallReport} The populated <code>CallReport</code> instance.
+   */
+  exports.constructFromObject = function(data, obj) {
+    if (data) { 
+      obj = obj || new exports();
+
+      if (data.hasOwnProperty('PhoneNumber')) {
+        obj['PhoneNumber'] = ApiClient.convertToType(data['PhoneNumber'], 'String');
+      }
+      if (data.hasOwnProperty('ReportedCallerName')) {
+        obj['ReportedCallerName'] = ApiClient.convertToType(data['ReportedCallerName'], 'String');
+      }
+      if (data.hasOwnProperty('ReportedCallerId')) {
+        obj['ReportedCallerId'] = ApiClient.convertToType(data['ReportedCallerId'], 'String');
+      }
+      if (data.hasOwnProperty('CallerType')) {
+        obj['CallerType'] = ApiClient.convertToType(data['CallerType'], 'String');
+      }
+      if (data.hasOwnProperty('Comment')) {
+        obj['Comment'] = ApiClient.convertToType(data['Comment'], 'String');
+      }
+      if (data.hasOwnProperty('UnwantedCall')) {
+        obj['UnwantedCall'] = ApiClient.convertToType(data['UnwantedCall'], 'Boolean');
+      }
+      if (data.hasOwnProperty('CallTime')) {
+        obj['CallTime'] = ApiClient.convertToType(data['CallTime'], 'Date');
+      }
+      if (data.hasOwnProperty('Reporter')) {
+        obj['Reporter'] = ApiClient.convertToType(data['Reporter'], 'String');
+      }
+      if (data.hasOwnProperty('IpAddress')) {
+        obj['IpAddress'] = ApiClient.convertToType(data['IpAddress'], 'String');
+      }
+      if (data.hasOwnProperty('Latitude')) {
+        obj['Latitude'] = ApiClient.convertToType(data['Latitude'], 'Number');
+      }
+      if (data.hasOwnProperty('Longitude')) {
+        obj['Longitude'] = ApiClient.convertToType(data['Longitude'], 'Number');
+      }
+    }
+    return obj;
+  }
 
 
   /**
-   * Call Report\r\n            PhoneNumber, \r\n            Caller name(optional), \r\n            Call category(optional), \r\n            Comment or tags(free text) (optional), \r\n            Unwanted call  - yes/no(optional),
-   **/
-  var CallReport = function CallReport() { 
-    var self = this;
-    
-    /**
-     * datatype: String
-     **/
-    self['PhoneNumber'] = null;
-    
-    /**
-     * datatype: String
-     **/
-    self['ReportedCallerName'] = null;
-    
-    /**
-     * datatype: String
-     **/
-    self['ReportedCallerId'] = null;
-    
-    /**
-     * datatype: CallerTypeEnum
-     **/
-    self['CallerType'] = null;
-    
-    /**
-     * datatype: String
-     **/
-    self['Comment'] = null;
-    
-    /**
-     * datatype: Boolean
-     **/
-    self['UnwantedCall'] = null;
-    
-    /**
-     * datatype: Date
-     **/
-    self['CallTime'] = null;
-    
-    /**
-     * datatype: String
-     **/
-    self['Reporter'] = null;
-    
-    /**
-     * datatype: String
-     **/
-    self['IpAddress'] = null;
-    
-    /**
-     * datatype: Number
-     **/
-    self['Latitude'] = null;
-    
-    /**
-     * datatype: Number
-     **/
-    self['Longitude'] = null;
-    
+   * @member {String} PhoneNumber
+   */
+  exports.prototype['PhoneNumber'] = undefined;
 
-    self.constructFromObject = function(data) {
-      if (!data) {
-        return this;
-      }
-      
-      self['PhoneNumber'] = ApiClient.convertToType(data['PhoneNumber'], 'String');
-      
-      self['ReportedCallerName'] = ApiClient.convertToType(data['ReportedCallerName'], 'String');
-      
-      self['ReportedCallerId'] = ApiClient.convertToType(data['ReportedCallerId'], 'String');
-      
-      self['CallerType'] = ApiClient.convertToType(data['CallerType'], 'String');
-      
-      self['Comment'] = ApiClient.convertToType(data['Comment'], 'String');
-      
-      self['UnwantedCall'] = ApiClient.convertToType(data['UnwantedCall'], 'Boolean');
-      
-      self['CallTime'] = ApiClient.convertToType(data['CallTime'], 'Date');
-      
-      self['Reporter'] = ApiClient.convertToType(data['Reporter'], 'String');
-      
-      self['IpAddress'] = ApiClient.convertToType(data['IpAddress'], 'String');
-      
-      self['Latitude'] = ApiClient.convertToType(data['Latitude'], 'Number');
-      
-      self['Longitude'] = ApiClient.convertToType(data['Longitude'], 'Number');
-      
-      return this;
-    }
+  /**
+   * @member {String} ReportedCallerName
+   */
+  exports.prototype['ReportedCallerName'] = undefined;
 
+  /**
+   * @member {String} ReportedCallerId
+   */
+  exports.prototype['ReportedCallerId'] = undefined;
+
+  /**
+   * @member {module:model/CallReport.CallerTypeEnum} CallerType
+   */
+  exports.prototype['CallerType'] = undefined;
+
+  /**
+   * @member {String} Comment
+   */
+  exports.prototype['Comment'] = undefined;
+
+  /**
+   * @member {Boolean} UnwantedCall
+   */
+  exports.prototype['UnwantedCall'] = undefined;
+
+  /**
+   * @member {Date} CallTime
+   */
+  exports.prototype['CallTime'] = undefined;
+
+  /**
+   * @member {String} Reporter
+   */
+  exports.prototype['Reporter'] = undefined;
+
+  /**
+   * @member {String} IpAddress
+   */
+  exports.prototype['IpAddress'] = undefined;
+
+  /**
+   * @member {Number} Latitude
+   */
+  exports.prototype['Latitude'] = undefined;
+
+  /**
+   * @member {Number} Longitude
+   */
+  exports.prototype['Longitude'] = undefined;
+
+
+  /**
+   * Allowed values for the <code>CallerType</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.CallerTypeEnum = { 
+    /**
+     * value: Unknown
+     * @const
+     */
+    UNKNOWN: "Unknown",
     
     /**
-     * @return {String}
-     **/
-    self.getPhoneNumber = function() {
-      return self['PhoneNumber'];
-    }
-
-    /**
-     * @param {String} phoneNumber
-     **/
-    self.setPhoneNumber = function(phoneNumber) {
-      self['PhoneNumber'] = phoneNumber;
-    }
+     * value: Telemarketing
+     * @const
+     */
+    TELEMARKETING: "Telemarketing",
     
     /**
-     * @return {String}
-     **/
-    self.getReportedCallerName = function() {
-      return self['ReportedCallerName'];
-    }
-
-    /**
-     * @param {String} reportedCallerName
-     **/
-    self.setReportedCallerName = function(reportedCallerName) {
-      self['ReportedCallerName'] = reportedCallerName;
-    }
+     * value: Collection_Agency
+     * @const
+     */
+    COLLECTION_AGENCY: "Collection_Agency",
     
     /**
-     * @return {String}
-     **/
-    self.getReportedCallerId = function() {
-      return self['ReportedCallerId'];
-    }
-
-    /**
-     * @param {String} reportedCallerId
-     **/
-    self.setReportedCallerId = function(reportedCallerId) {
-      self['ReportedCallerId'] = reportedCallerId;
-    }
+     * value: Political
+     * @const
+     */
+    POLITICAL: "Political",
     
     /**
-     * @return {CallerTypeEnum}
-     **/
-    self.getCallerType = function() {
-      return self['CallerType'];
-    }
-
-    /**
-     * @param {CallerTypeEnum} callerType
-     **/
-    self.setCallerType = function(callerType) {
-      self['CallerType'] = callerType;
-    }
+     * value: Surveyor
+     * @const
+     */
+    SURVEYOR: "Surveyor",
     
     /**
-     * @return {String}
-     **/
-    self.getComment = function() {
-      return self['Comment'];
-    }
-
-    /**
-     * @param {String} comment
-     **/
-    self.setComment = function(comment) {
-      self['Comment'] = comment;
-    }
+     * value: Prank_Call
+     * @const
+     */
+    PRANK_CALL: "Prank_Call",
     
     /**
-     * @return {Boolean}
-     **/
-    self.getUnwantedCall = function() {
-      return self['UnwantedCall'];
-    }
-
-    /**
-     * @param {Boolean} unwantedCall
-     **/
-    self.setUnwantedCall = function(unwantedCall) {
-      self['UnwantedCall'] = unwantedCall;
-    }
+     * value: Fund_Raiser
+     * @const
+     */
+    FUND_RAISER: "Fund_Raiser",
     
     /**
-     * @return {Date}
-     **/
-    self.getCallTime = function() {
-      return self['CallTime'];
-    }
-
-    /**
-     * @param {Date} callTime
-     **/
-    self.setCallTime = function(callTime) {
-      self['CallTime'] = callTime;
-    }
+     * value: Other_Commercial
+     * @const
+     */
+    OTHER_COMMERCIAL: "Other_Commercial",
     
     /**
-     * @return {String}
-     **/
-    self.getReporter = function() {
-      return self['Reporter'];
-    }
-
-    /**
-     * @param {String} reporter
-     **/
-    self.setReporter = function(reporter) {
-      self['Reporter'] = reporter;
-    }
+     * value: Scam
+     * @const
+     */
+    SCAM: "Scam",
     
     /**
-     * @return {String}
-     **/
-    self.getIpAddress = function() {
-      return self['IpAddress'];
-    }
-
-    /**
-     * @param {String} ipAddress
-     **/
-    self.setIpAddress = function(ipAddress) {
-      self['IpAddress'] = ipAddress;
-    }
+     * value: VOIP
+     * @const
+     */
+    VOIP: "VOIP",
     
     /**
-     * @return {Number}
-     **/
-    self.getLatitude = function() {
-      return self['Latitude'];
-    }
-
-    /**
-     * @param {Number} latitude
-     **/
-    self.setLatitude = function(latitude) {
-      self['Latitude'] = latitude;
-    }
+     * value: Business
+     * @const
+     */
+    BUSINESS: "Business",
     
     /**
-     * @return {Number}
-     **/
-    self.getLongitude = function() {
-      return self['Longitude'];
-    }
-
-    /**
-     * @param {Number} longitude
-     **/
-    self.setLongitude = function(longitude) {
-      self['Longitude'] = longitude;
-    }
+     * value: Reminder_Notification_Call
+     * @const
+     */
+    REMINDER_NOTIFICATION_CALL: "Reminder_Notification_Call",
     
-
-    self.toJson = function() {
-      return JSON.stringify(self);
-    }
+    /**
+     * value: Junk_Fax
+     * @const
+     */
+    JUNK_FAX: "Junk_Fax",
+    
+    /**
+     * value: Fax_Machine
+     * @const
+     */
+    FAX_MACHINE: "Fax_Machine",
+    
+    /**
+     * value: Spam_Text
+     * @const
+     */
+    SPAM_TEXT: "Spam_Text",
+    
+    /**
+     * value: RoboCall
+     * @const
+     */
+    ROBOCALL: "RoboCall",
+    
+    /**
+     * value: NotSpam
+     * @const
+     */
+    NOTSPAM: "NotSpam",
+    
+    /**
+     * value: Callback
+     * @const
+     */
+    CALLBACK: "Callback"
   };
 
-  if (module) {
-    module.CallReport = CallReport;
-  }
-
-  return CallReport;
-  
-  
+  return exports;
 }));
